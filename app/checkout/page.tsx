@@ -21,7 +21,7 @@ export default function CheckoutPage() {
     const payload = {
       email: form.get('email'), phone: form.get('phone'), name: form.get('name'),
       address: `${form.get('address')}, ${form.get('city')}, ${form.get('state')} - ${form.get('pin')}`,
-      items: items.map(({ slug, name, quantity, option, price, customization }) => ({ slug, name, quantity, option, price, customization })),
+      items: items.map(({ slug, name, quantity, option, price, customization, uploadedImage }) => ({ slug, name, quantity, option, price, customization, uploadedImage })),
       subtotal: total, shipping: 0, total,
     }
     if (!items.length) { setError('Your cart is empty. Add a product before checking out.'); setSubmitting(false); return }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-export type CartItem = { slug: string; name: string; price: number; image: string; quantity: number; option: string; customization?: string }
+export type CartItem = { slug: string; name: string; price: number; image: string; quantity: number; option: string; customization?: string; uploadedImage?: string }
 
 function useStored<T>(key: string, initial: T) {
   const [value, setValue] = useState<T>(initial)
