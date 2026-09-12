@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { sql } from 'drizzle-orm'
+import { isAdminAuthenticated } from '@/lib/admin-auth'
 
 export async function POST(request: Request) {
   try {
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   try {
     const result = await db.execute(sql`
       SELECT id, customer_name, customer_email, phone, shipping_address, items, subtotal, shipping, total, status, created_at
