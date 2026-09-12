@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { useState } from 'react'
 import { ChevronDown, Grid2X2, SlidersHorizontal } from 'lucide-react'
 import type { Product } from '@/lib/catalog'
 import { formatPrice } from '@/lib/catalog'
@@ -16,15 +17,17 @@ const collections = [
   { label: 'Your logo here', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=400&q=80' },
 ]
 
-function FilterButton({ children }: { children: ReactNode }) {
-  return <button type="button" className="catalog-filter">{children}<ChevronDown size={16}/></button>
+function FilterButton({ children, options, active, onToggle }: { children: ReactNode; options: string[]; active: boolean; onToggle: () => void }) {
+  return <div className="filter-group"><button type="button" className="catalog-filter" aria-expanded={active} onClick={onToggle}>{children}<ChevronDown size={16}/></button>{active && <div className="filter-popover">{options.map((option) => <button type="button" key={option} onClick={onToggle}>{option}</button>)}</div>}</div>
 }
 
 export function CategoryLanding({ title, products }: { title: string; products: Product[] }) {
+  const [activeFilter, setActiveFilter] = useState<string | null>(null)
+  const toggleFilter = (name: string) => setActiveFilter((current) => current === name ? null : name)
   return <div className="category-marketplace">
-    <div className="collection-strip" aria-label="Popular collections">{collections.map((collection) => <Link href="#products" className="collection-circle" key={collection.label}><img src={collection.image} alt=""/><span>{collection.label}</span></Link>)}</div>
+    <div className="collection-strip" id="collections" aria-label="Popular collections">{collections.map((collection) => <Link href="#products" className="collection-circle" key={collection.label}><img src={collection.image} alt=""/><span>{collection.label}</span></Link>)}</div>
     <div className="marketplace-heading"><div><h1>{title}</h1><p>{products.length * 742 + 184} results</p></div><span className="marketplace-count">{products.length} featured products</span></div>
-    <div className="filter-bar"><button type="button" className="collections-button"><Grid2X2 size={20}/> Collections</button><FilterButton>Refine by Category</FilterButton><FilterButton>Material</FilterButton><FilterButton>Style</FilterButton><FilterButton>Product Color</FilterButton><FilterButton>Decoration type</FilterButton><button type="button" className="add-filter"><SlidersHorizontal size={17}/> Add Filter <span>+</span></button><label className="sort-control">Sort by <select defaultValue="popular" aria-label="Sort products"><option value="popular">Popular</option><option value="price">Price</option><option value="rating">Top rated</option></select><ChevronDown size={16}/></label></div>
+    <div className="filter-bar"><button type="button" className="collections-button" onClick={() => document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })}><Grid2X2 size={20}/> Collections</button><FilterButton options={['All categories', 'Best sellers', 'New arrivals']} active={activeFilter === 'category'} onToggle={() => toggleFilter('category')}>Refine by Category</FilterButton><FilterButton options={['Cotton', 'Premium', 'Recycled']} active={activeFilter === 'material'} onToggle={() => toggleFilter('material')}>Material</FilterButton><FilterButton options={['Classic', 'Modern', 'Minimal']} active={activeFilter === 'style'} onToggle={() => toggleFilter('style')}>Style</FilterButton><FilterButton options={['Black', 'White', 'Blue']} active={activeFilter === 'color'} onToggle={() => toggleFilter('color')}>Product Color</FilterButton><FilterButton options={['Printed', 'Photo', 'Text']} active={activeFilter === 'decoration'} onToggle={() => toggleFilter('decoration')}>Decoration type</FilterButton><button type="button" className="add-filter" onClick={() => toggleFilter('more')}><SlidersHorizontal size={17}/> Add Filter <span>+</span></button><label className="sort-control">Sort by <select defaultValue="popular" aria-label="Sort products"><option value="popular">Popular</option><option value="price">Price</option><option value="rating">Top rated</option></select><ChevronDown size={16}/></label></div>
     <div className="marketplace-grid" id="products"><Link href="/contact" className="create-product-tile"><span className="create-product-icon">＋</span><strong>Create your own<br/>product</strong></Link>{products.map((product) => <ProductCard product={product} key={product.slug}/>)}</div>
   </div>
 }
