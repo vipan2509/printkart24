@@ -22,11 +22,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please complete the required order details.' }, { status: 400 })
     }
 
-    const [order] = await db.execute(sql`
+    const result = await db.execute(sql`
       INSERT INTO orders (customer_name, customer_email, phone, shipping_address, items, subtotal, shipping, total)
-      VALUES (${name}, ${email}, ${phone}, ${address}, ${JSON.stringify(sanitizedItems)}::jsonb, ${subtotal}, ${shipping}, ${total})
+      VALUES (${name}, ${email}, ${phone}, ${address}, CAST(${JSON.stringify(sanitizedItems)} AS jsonb), ${subtotal}, ${shipping}, ${total})
       RETURNING id, customer_name, customer_email, total, status, created_at
     `)
+    const order = result.rows[0]
 
     return NextResponse.json({ order }, { status: 201 })
   } catch (error) {
