@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ order }, { status: 201 })
   } catch (error) {
     console.error('[v0] order creation failed', error)
-    return NextResponse.json({ error: 'Unable to place this order right now.' }, { status: 500 })
+    return NextResponse.json({ error: 'We couldn’t place your order. Please check your details and try again.' }, { status: 500 })
   }
 }
 
