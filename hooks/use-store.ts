@@ -8,15 +8,23 @@ function useStored<T>(key: string, initial: T) {
   const [value, setValue] = useState<T>(initial)
   const [hydrated, setHydrated] = useState(false)
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(key)
-      if (stored) setValue(JSON.parse(stored))
-    } catch {}
+    const syncValue = () => {
+      try {
+        const stored = window.localStorage.getItem(key)
+        if (stored) setValue(JSON.parse(stored))
+      } catch {}
+    }
+    syncValue()
+    const handleStorage = (event: StorageEvent) => { if (event.key === key) syncValue() }
+    const handleCartUpdate = (event: Event) => { if ((event as CustomEvent<{ key?: string }>).detail?.key === key) syncValue() }
+    window.addEventListener('storage', handleStorage)
+    window.addEventListener('printkart-store-update', handleCartUpdate)
     setHydrated(true)
+    return () => { window.removeEventListener('storage', handleStorage); window.removeEventListener('printkart-store-update', handleCartUpdate) }
   }, [key])
   useEffect(() => {
     if (!hydrated) return
-    try { window.localStorage.setItem(key, JSON.stringify(value)) } catch {}
+    try { window.localStorage.setItem(key, JSON.stringify(value)); window.dispatchEvent(new CustomEvent('printkart-store-update', { detail: { key } })) } catch {}
   }, [key, value, hydrated])
   return [value, setValue] as const
 }
