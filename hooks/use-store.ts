@@ -1,17 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export type CartItem = { slug: string; name: string; price: number; image: string; quantity: number; option: string; customization?: string; uploadedImage?: string }
 
 function useStored<T>(key: string, initial: T) {
   const [value, setValue] = useState<T>(initial)
   const [hydrated, setHydrated] = useState(false)
+  const syncingRef = useRef(false)
   useEffect(() => {
     const syncValue = () => {
       try {
         const stored = window.localStorage.getItem(key)
-        if (stored) setValue(JSON.parse(stored))
+        if (stored) { syncingRef.current = true; setValue(JSON.parse(stored)) }
       } catch {}
     }
     syncValue()
@@ -24,7 +25,11 @@ function useStored<T>(key: string, initial: T) {
   }, [key])
   useEffect(() => {
     if (!hydrated) return
-    try { window.localStorage.setItem(key, JSON.stringify(value)); window.dispatchEvent(new CustomEvent('printkart-store-update', { detail: { key } })) } catch {}
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value))
+      if (syncingRef.current) syncingRef.current = false
+      else window.dispatchEvent(new CustomEvent('printkart-store-update', { detail: { key } }))
+    } catch {}
   }, [key, value, hydrated])
   return [value, setValue] as const
 }
