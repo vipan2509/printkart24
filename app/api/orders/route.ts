@@ -41,6 +41,13 @@ export async function POST(request: Request) {
         html: `<p>Hi ${name},</p><p>Thank you for your order with PRINTKART.</p><p><strong>Items:</strong> ${itemSummary}</p><p><strong>Total:</strong> ₹${total.toFixed(2)}</p><p>We&apos;ll share another update when your order is ready.</p>`,
       }, { idempotencyKey: `order-thank-you/${order?.id || email}` })
       if (emailError) console.error('[v0] customer order email failed', emailError.message)
+      const { error: adminEmailError } = await resend.emails.send({
+        from,
+        to: ['vipanp09@gmail.com'],
+        subject: `New PRINTKART order${order?.id ? ` #${order.id}` : ''}`,
+        html: `<p>A new PRINTKART order has been placed.</p><p><strong>Customer:</strong> ${name} (${email})</p><p><strong>Phone:</strong> ${phone}</p><p><strong>Address:</strong> ${address}</p><p><strong>Items:</strong> ${itemSummary}</p><p><strong>Total:</strong> ₹${total.toFixed(2)}</p>`,
+      }, { idempotencyKey: `order-admin-alert/${order?.id || email}` })
+      if (adminEmailError) console.error('[v0] admin order email failed', adminEmailError.message)
     }
 
     return NextResponse.json({ order, whatsappNumber: '918288811860' }, { status: 201 })
