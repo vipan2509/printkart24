@@ -26,7 +26,8 @@ export function useCart() {
   const add = (item: CartItem) => setItems((current) => { const existing = current.find((entry) => entry.slug === item.slug && entry.option === item.option && entry.customization === item.customization); return existing ? current.map((entry) => entry === existing ? { ...entry, quantity: entry.quantity + item.quantity } : entry) : [...current, item] })
   const update = (slug: string, quantity: number) => setItems((current) => quantity < 1 ? current.filter((item) => item.slug !== slug) : current.map((item) => item.slug === slug ? { ...item, quantity } : item))
   const remove = (slug: string) => setItems((current) => current.filter((item) => item.slug !== slug))
-  return { items, add, update, remove, count: items.reduce((total, item) => total + item.quantity, 0), total: items.reduce((total, item) => total + item.price * item.quantity, 0) }
+  const clear = () => setItems([])
+  return { items, add, update, remove, clear, count: items.reduce((total, item) => total + item.quantity, 0), total: items.reduce((total, item) => total + item.price * item.quantity, 0) }
 }
 
 export function useWishlist() { return useStored<string[]>('printkart-wishlist', []) }

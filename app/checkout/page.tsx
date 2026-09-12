@@ -1,10 +1,36 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Check, Lock } from 'lucide-react'
 import { Footer, Header } from '@/components/storefront'
 import { formatPrice } from '@/lib/catalog'
 import { useCart } from '@/hooks/use-store'
 
-export default function CheckoutPage() { const { items, total } = useCart(); const [done, setDone] = useState(false); if (done) return <><Header/><main className="page-shell section-pad"><div className="success-state"><div className="success-icon"><Check/></div><h1>Order received.</h1><p>Thank you for making something special. We&apos;ll send confirmation details to your email shortly.</p><Link href="/" className="button-primary">Back to home</Link></div></main><Footer/></>; return <><Header/><main className="page-shell section-pad"><div className="breadcrumbs"><Link href="/cart">Cart</Link> / Checkout</div><div className="checkout-layout"><form className="checkout-form" onSubmit={(event) => { event.preventDefault(); setDone(true) }}><h1 className="section-title">Almost <span>there.</span></h1><p className="checkout-subtitle">Where should we send your PRINTKART order?</p><div className="form-section"><h2>Contact information</h2><div className="form-grid"><label>Email address<input required type="email" placeholder="you@example.com"/></label><label>Phone number<input required type="tel" placeholder="+91 98765 43210"/></label></div></div><div className="form-section"><h2>Delivery address</h2><div className="form-grid"><label>Full name<input required placeholder="Your full name"/></label><label>PIN code<input required inputMode="numeric" placeholder="400001"/></label><label className="span-two">Address<input required placeholder="House number, street, area"/></label><label>City<input required placeholder="Mumbai"/></label><label>State<select defaultValue="Maharashtra"><option>Maharashtra</option><option>Delhi</option><option>Karnataka</option><option>Tamil Nadu</option></select></label></div></div><div className="form-section"><h2>Payment</h2><div className="payment-note"><Lock size={17}/> This demo checkout is secure. No payment will be charged.</div><button className="button-primary wide" type="submit">Place order <span>{formatPrice(total)}</span></button></div></form><aside className="summary-card checkout-summary"><h2>Order summary</h2>{items.map((item) => <div className="checkout-item" key={item.slug}><img src={item.image} alt=""/><span>{item.name}<small>Qty {item.quantity}</small></span><strong>{formatPrice(item.price * item.quantity)}</strong></div>)}<hr/><div className="summary-total"><span>Total</span><strong>{formatPrice(total)}</strong></div></aside></div></main><Footer/></> }
+export default function CheckoutPage() {
+  const { items, total, clear } = useCart()
+  const [done, setDone] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
+
+  async function placeOrder(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setSubmitting(true)
+    setError('')
+    const form = new FormData(event.currentTarget)
+    const payload = {
+      email: form.get('email'), phone: form.get('phone'), name: form.get('name'),
+      address: `${form.get('address')}, ${form.get('city')}, ${form.get('state')} - ${form.get('pin')}`,
+      items: items.map(({ product, quantity, selectedOption }) => ({ slug: product.slug, name: product.name, quantity, option, price: product.price })),
+      subtotal: total, shipping: 0, total,
+    }
+    const response = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+    if (!response.ok) { const result = await response.json(); setError(result.error || 'Unable to place your order.'); setSubmitting(false); return }
+    clear()
+    setDone(true)
+  }
+
+  if (done) return <><Header /><main className="page-shell section-pad"><div className="success-state"><div className="success-icon"><Check /></div><h1>Order received.</h1><p>Thank you for making something special. We&apos;ll send confirmation details to your email shortly.</p><Link href="/" className="button-primary">Back to home</Link></div></main><Footer /></>
+
+  return <><Header /><main className="page-shell section-pad"><div className="breadcrumbs"><Link href="/cart">Cart</Link> / Checkout</div><div className="checkout-layout"><form className="checkout-form" onSubmit={placeOrder}><h1 className="section-title">Almost <span>there.</span></h1><p className="checkout-subtitle">Where should we send your PRINTKART order?</p><div className="form-section"><h2>Contact information</h2><div className="form-grid"><label>Email address<input required name="email" type="email" placeholder="you@example.com" /></label><label>Phone number<input required name="phone" type="tel" placeholder="+91 98765 43210" /></label></div></div><div className="form-section"><h2>Delivery address</h2><div className="form-grid"><label>Full name<input required name="name" placeholder="Your full name" /></label><label>PIN code<input required name="pin" inputMode="numeric" placeholder="400001" /></label><label className="span-two">Address<input required name="address" placeholder="House number, street, area" /></label><label>City<input required name="city" placeholder="Mumbai" /></label><label>State<select name="state" defaultValue="Maharashtra"><option>Maharashtra</option><option>Delhi</option><option>Karnataka</option><option>Tamil Nadu</option></select></label></div></div><div className="form-section"><h2>Payment</h2><div className="payment-note"><Lock size={17} /> This demo checkout is secure. No payment will be charged.</div>{error && <p className="form-error" role="alert">{error}</p>}<button className="button-primary wide" type="submit" disabled={submitting}>{submitting ? 'Saving order…' : <>Place order <span>{formatPrice(total)}</span></>}</button></div></form><aside className="checkout-summary"><p className="eyebrow">ORDER SUMMARY</p><h2>{items.length} items</h2>{items.map(({ product, quantity }) => <div className="summary-row" key={product.slug}><span>{product.name} × {quantity}</span><strong>{formatPrice(product.price * quantity)}</strong></div>)}<div className="summary-total"><span>Total</span><strong>{formatPrice(total)}</strong></div></aside></div></main><Footer /></>
+}
