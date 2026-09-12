@@ -36,6 +36,19 @@ export async function POST(request: Request) {
   }
 }
 
+export async function PATCH(request: Request) {
+  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  try {
+    const { id } = await request.json()
+    if (!id || typeof id !== 'string') return NextResponse.json({ error: 'Order ID is required.' }, { status: 400 })
+    await db.execute(sql`UPDATE orders SET status = 'Completed' WHERE id = ${id}`)
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error('[v0] order completion failed', error)
+    return NextResponse.json({ error: 'Unable to complete this order.' }, { status: 500 })
+  }
+}
+
 export async function GET() {
   if (!(await isAdminAuthenticated())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   try {
