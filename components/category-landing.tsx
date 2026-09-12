@@ -14,7 +14,6 @@ const collections = [
   { label: 'Corporate', image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=400&q=80' },
   { label: 'For everyone', image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=400&q=80' },
   { label: 'Your logo here', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=400&q=80' },
-  { label: 'Modern', image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=400&q=80' },
 ]
 
 function FilterButton({ children }: { children: ReactNode }) {
