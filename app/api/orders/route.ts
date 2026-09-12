@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { sql } from 'drizzle-orm'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
+import { Resend } from 'resend'
 
 export async function POST(request: Request) {
   try {
@@ -28,8 +29,21 @@ export async function POST(request: Request) {
       RETURNING id, customer_name, customer_email, total, status, created_at
     `)
     const order = result.rows[0]
+    const resendApiKey = process.env.RESEND_API_KEY
+    if (resendApiKey) {
+      const resend = new Resend(resendApiKey)
+      const from = `PRINTKART <orders@${process.env.RESEND_EMAIL_DOMAIN || 'resend.dev'}>`
+      const itemSummary = sanitizedItems.map((item) => `${item.name} × ${item.quantity}`).join(', ')
+      const { error: emailError } = await resend.emails.send({
+        from,
+        to: [email],
+        subject: `Thank you for your PRINTKART order${order?.id ? ` #${order.id}` : ''}`,
+        html: `<p>Hi ${name},</p><p>Thank you for your order with PRINTKART.</p><p><strong>Items:</strong> ${itemSummary}</p><p><strong>Total:</strong> ₹${total.toFixed(2)}</p><p>We&apos;ll share another update when your order is ready.</p>`,
+      }, { idempotencyKey: `order-thank-you/${order?.id || email}` })
+      if (emailError) console.error('[v0] customer order email failed', emailError.message)
+    }
 
-    return NextResponse.json({ order }, { status: 201 })
+    return NextResponse.json({ order, whatsappNumber: '918288811860' }, { status: 201 })
   } catch (error) {
     console.error('[v0] order creation failed', error)
     return NextResponse.json({ error: 'We couldn’t place your order. Please check your details and try again.' }, { status: 500 })
