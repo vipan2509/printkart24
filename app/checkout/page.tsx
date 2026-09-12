@@ -21,7 +21,7 @@ export default function CheckoutPage() {
     const payload = {
       email: form.get('email'), phone: form.get('phone'), name: form.get('name'),
       address: `${form.get('address')}, ${form.get('city')}, ${form.get('state')} - ${form.get('pin')}`,
-      items: items.map(({ product, quantity, selectedOption }) => ({ slug: product.slug, name: product.name, quantity, option, price: product.price })),
+      items: items.map(({ product, quantity, option }) => ({ slug: product.slug, name: product.name, quantity, option, price: product.price })),
       subtotal: total, shipping: 0, total,
     }
     const response = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
