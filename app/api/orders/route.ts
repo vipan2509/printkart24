@@ -11,6 +11,9 @@ export async function POST(request: Request) {
     const phone = String(body.phone || '').trim()
     const address = String(body.address || '').trim()
     const items = Array.isArray(body.items) ? body.items : []
+    const sanitizedItems = items.map((item) => ({
+      slug: String(item?.slug || '').slice(0, 160), name: String(item?.name || '').slice(0, 240), quantity: Math.max(1, Math.min(100, Number(item?.quantity) || 1)), option: String(item?.option || '').slice(0, 160), price: Number(item?.price) || 0, customization: String(item?.customization || '').slice(0, 500), uploadedImage: typeof item?.uploadedImage === 'string' && item.uploadedImage.startsWith('data:image/') && item.uploadedImage.length < 900000 ? item.uploadedImage : '',
+    }))
     const subtotal = Number(body.subtotal)
     const shipping = Number(body.shipping || 0)
     const total = Number(body.total)
@@ -21,7 +24,7 @@ export async function POST(request: Request) {
 
     const [order] = await db.execute(sql`
       INSERT INTO orders (customer_name, customer_email, phone, shipping_address, items, subtotal, shipping, total)
-      VALUES (${name}, ${email}, ${phone}, ${address}, ${JSON.stringify(items)}::jsonb, ${subtotal}, ${shipping}, ${total})
+      VALUES (${name}, ${email}, ${phone}, ${address}, ${JSON.stringify(sanitizedItems)}::jsonb, ${subtotal}, ${shipping}, ${total})
       RETURNING id, customer_name, customer_email, total, status, created_at
     `)
 
