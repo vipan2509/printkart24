@@ -70,6 +70,20 @@ export async function PATCH(request: Request) {
   }
 }
 
+export async function DELETE(request: Request) {
+  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  try {
+    const { id } = await request.json()
+    if (!id || typeof id !== 'string') return NextResponse.json({ error: 'Order ID is required.' }, { status: 400 })
+    const result = await db.execute(sql`DELETE FROM orders WHERE id = ${id} RETURNING id`)
+    if (result.rows.length === 0) return NextResponse.json({ error: 'Order not found.' }, { status: 404 })
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error('[v0] order deletion failed', error)
+    return NextResponse.json({ error: 'Unable to delete this order.' }, { status: 500 })
+  }
+}
+
 export async function GET() {
   if (!(await isAdminAuthenticated())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   try {
