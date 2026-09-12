@@ -44,6 +44,7 @@ export function ProductCustomizer({ product }: { product: Product }) {
   function addItem() {
     add({ slug: product.slug, name: product.name, price: product.price, image: product.image, quantity, option, customization: text, uploadedImage })
     setCartMessage(`${quantity} ${quantity === 1 ? 'Item' : 'Items'} added to cart`)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     window.setTimeout(() => setCartMessage(''), 2600)
   }
 
