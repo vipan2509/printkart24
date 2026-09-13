@@ -96,12 +96,6 @@ export function Header() {
               Packaging
             </Link>
             <Link
-              href="/category/business-printing"
-              className={active('/category/business-printing') ? 'menu-active' : undefined}
-            >
-              Promotional Products
-            </Link>
-            <Link
               href="/category/clothing"
               className={active('/category/clothing') ? 'menu-active' : ''}
               aria-current={active('/category/clothing') ? 'page' : undefined}
