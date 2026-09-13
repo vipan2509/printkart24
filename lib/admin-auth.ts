@@ -4,7 +4,9 @@ import { cookies } from 'next/headers'
 const COOKIE_NAME = 'printkart_admin'
 
 function token() {
-  return createHmac('sha256', process.env.ADMIN_PASSWORD || 'missing-admin-password').update('printkart-admin-session').digest('hex')
+  return createHmac('sha256', process.env.ADMIN_PASSWORD || 'missing-admin-password')
+    .update('printkart-admin-session')
+    .digest('hex')
 }
 
 export function isValidAdminToken(value: string | undefined) {
