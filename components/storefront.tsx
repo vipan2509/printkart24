@@ -1,21 +1,513 @@
 'use client'
 
 import Link from 'next/link'
-import { BriefcaseBusiness, Camera, Globe2, Heart, Menu, MessageCircle, Search, ShoppingBag, Star, X } from 'lucide-react'
+import {
+  BriefcaseBusiness,
+  Camera,
+  Globe2,
+  Heart,
+  Menu,
+  MessageCircle,
+  Search,
+  ShoppingBag,
+  Star,
+  X,
+} from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import type { Product } from '@/lib/catalog'
 import { formatPrice } from '@/lib/catalog'
 import { useCart, useWishlist } from '@/hooks/use-store'
 
-export function Header() { const [open, setOpen] = useState(false); const pathname = usePathname(); const { count } = useCart(); const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`); return <><div className="utility-bar">PRINTKART24 — made for your next big idea. <span>Free delivery on orders over ₹999</span></div><header className="site-header"><div className="page-shell header-row"><button className="icon-button mobile-only" onClick={() => setOpen(true)} aria-label="Open menu"><Menu size={21}/></button><Link href="/" className="brand-mark" aria-label="PRINTKART24 home"><img src="/printkart24-logo.png" alt="Printkart24 Custom Gifts" /></Link><form action="/search" className="search-box header-search"><Search size={18}/><input name="q" placeholder="Search for products or designs" aria-label="Search products"/><button type="submit" aria-label="Submit search"><Search size={18}/></button></form><div className="header-actions"><a href="https://wa.me/918288811860?text=Hi%20PRINTKART24%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noreferrer" className="header-signin">Get a Quote</a><Link href="/login" className="icon-button" aria-label="Account"><BriefcaseBusiness size={20}/></Link><Link href="/wishlist" className="icon-button" aria-label="Wishlist"><Heart size={20}/></Link><Link href="/cart" className="bag-button" aria-label={`Cart with ${count} items`}><ShoppingBag size={20}/><span>{count}</span></Link></div></div><div className="page-shell category-nav"><nav><details className="menu-dropdown"><summary><Link href="/category/clothing" className={active('/category/clothing') ? 'menu-active' : ''} aria-current={active('/category/clothing') ? 'page' : undefined}>Personalized Gifts</Link></summary><div className="mega-menu"><div><Link href="/category/clothing">T-Shirts</Link><Link href="/category/photo-gifts">Mugs</Link><Link href="/category/stationery">Notebooks & Diaries</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Pens</Link><Link href="/category/photo-gifts">Keychains</Link><Link href="/category/photo-gifts">Bottles & Tumblers</Link><Link href="/category/stationery">Diaries</Link><Link href="/category/clothing">Caps</Link><Link href="/category/clothing">Bags & Tote Bags</Link><Link href="/category/photo-gifts">Photo Frames</Link><Link href="/category/photo-gifts">Cushions</Link><Link href="/category/photo-gifts">Mobile Covers</Link><Link href="/category/stationery">Mouse Pads</Link><Link href="/category/stationery">Stickers & Labels</Link></div></div></details><details className="menu-dropdown"><summary><Link href="/category/photo-gifts" className={active('/category/photo-gifts') ? 'menu-active' : ''} aria-current={active('/category/photo-gifts') ? 'page' : undefined}>Corporate Gifts</Link></summary><div className="mega-menu"><div><Link href="/category/clothing">Corporate T-Shirts</Link><Link href="/category/photo-gifts">Custom Mugs</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Branded Pens</Link><Link href="/category/stationery">Diaries & Notebooks</Link><Link href="/category/photo-gifts">Keychains</Link><Link href="/category/photo-gifts">Bottles & Tumblers</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">ID Cards & Lanyards</Link><Link href="/category/photo-gifts">Gift Sets</Link><Link href="/contact">Employee Welcome Kits</Link><Link href="/contact">Event & Conference Kits</Link></div></div></details><details className="menu-dropdown"><summary><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing" className={active('/category/business-printing') ? 'menu-active' : ''} aria-current={active('/category/business-printing') ? 'page' : undefined}>Packaging</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing" className="menu-direct">Promotional Products</Link></summary><div className="mega-menu"><div><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Disposable Coffee Cups</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Paper Cups</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Food Packaging</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Takeaway Boxes</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Paper Bags</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Product Boxes</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Custom Pouches</Link><Link href="/category/stationery">Stickers & Labels</Link><Link href="/category/stationery">Bottle & Jar Labels</Link><Link href="/category/stationery">Thank You Cards</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Packaging Sleeves</Link><Link href="/category/stationery">Custom Printed Tissue Paper</Link></div></div></details><details className="menu-dropdown"><summary><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing" className={active('/category/business-printing') ? 'menu-active' : ''} aria-current={active('/category/business-printing') ? 'page' : undefined}>Business Printing</Link></summary><div className="mega-menu"><div><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Logo Printing</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Brand Merchandise</Link><Link href="/category/stationery">Office Stationery</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Business Cards</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Letterheads & Envelopes</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Brochures & Flyers</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Posters & Banners</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Promotional Materials</Link></div></div></details><details className="menu-dropdown"><summary><Link href="/category/photo-gifts">Collections</Link></summary><div className="mega-menu"><div><Link href="/product/classic-business-cards">Upload Your Design</Link><Link href="/product/classic-business-cards">Add Logo</Link><Link href="/product/photo-prints">Add Photo</Link><Link href="/product/custom-notebooks">Add Text</Link><Link href="/category/photo-gifts">Customize Product</Link></div></div></details><Link href="/category/photo-gifts">Collections</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing" className="menu-offer">Offers</Link></nav></div></header>{open && <div className="mobile-drawer"><div className="drawer-scrim" onClick={() => setOpen(false)}/><aside><div className="drawer-top"><span className="brand-mark"><span>PRINT</span><i>KART</i><b>®</b></span><button className="icon-button" onClick={() => setOpen(false)} aria-label="Close menu"><X size={21}/></button></div><nav><Link href="/" onClick={() => setOpen(false)}>Home</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing" onClick={() => setOpen(false)}>Business printing</Link><Link href="/category/photo-gifts" onClick={() => setOpen(false)}>Photo gifts</Link><Link href="/category/clothing" onClick={() => setOpen(false)}>Clothing</Link><Link href="/category/stationery" onClick={() => setOpen(false)}>Stationery</Link></nav></aside></div>}</> }
+export function Header() {
+  const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+  const { count } = useCart()
+  const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+  return (
+    <>
+      <div className="utility-bar">
+        PRINTKART24 — made for your next big idea. <span>Free delivery on orders over ₹999</span>
+      </div>
+      <header className="site-header">
+        <div className="page-shell header-row">
+          <button
+            className="icon-button mobile-only"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu size={21} />
+          </button>
+          <Link href="/" className="brand-mark" aria-label="PRINTKART24 home">
+            <img src="/printkart24-logo.png" alt="Printkart24 Custom Gifts" />
+          </Link>
+          <form action="/search" className="search-box header-search">
+            <Search size={18} />
+            <input
+              name="q"
+              placeholder="Search for products or designs"
+              aria-label="Search products"
+            />
+            <button type="submit" aria-label="Submit search">
+              <Search size={18} />
+            </button>
+          </form>
+          <div className="header-actions">
+            <a
+              href="https://wa.me/918288811860?text=Hi%20PRINTKART24%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+              target="_blank"
+              rel="noreferrer"
+              className="header-signin"
+            >
+              Get a Quote
+            </a>
+            <Link href="/login" className="icon-button" aria-label="Account">
+              <BriefcaseBusiness size={20} />
+            </Link>
+            <Link href="/wishlist" className="icon-button" aria-label="Wishlist">
+              <Heart size={20} />
+            </Link>
+            <Link href="/cart" className="bag-button" aria-label={`Cart with ${count} items`}>
+              <ShoppingBag size={20} />
+              <span>{count}</span>
+            </Link>
+          </div>
+        </div>
+        <div className="page-shell category-nav">
+          <nav>
+            <details className="menu-dropdown">
+              <summary>
+                <Link
+                  href="/category/clothing"
+                  className={active('/category/clothing') ? 'menu-active' : ''}
+                  aria-current={active('/category/clothing') ? 'page' : undefined}
+                >
+                  Personalized Gifts
+                </Link>
+              </summary>
+              <div className="mega-menu">
+                <div>
+                  <Link href="/category/clothing">T-Shirts</Link>
+                  <Link href="/category/photo-gifts">Mugs</Link>
+                  <Link href="/category/stationery">Notebooks & Diaries</Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Pens
+                  </Link>
+                  <Link href="/category/photo-gifts">Keychains</Link>
+                  <Link href="/category/photo-gifts">Bottles & Tumblers</Link>
+                  <Link href="/category/stationery">Diaries</Link>
+                  <Link href="/category/clothing">Caps</Link>
+                  <Link href="/category/clothing">Bags & Tote Bags</Link>
+                  <Link href="/category/photo-gifts">Photo Frames</Link>
+                  <Link href="/category/photo-gifts">Cushions</Link>
+                  <Link href="/category/photo-gifts">Mobile Covers</Link>
+                  <Link href="/category/stationery">Mouse Pads</Link>
+                  <Link href="/category/stationery">Stickers & Labels</Link>
+                </div>
+              </div>
+            </details>
+            <details className="menu-dropdown">
+              <summary>
+                <Link
+                  href="/category/photo-gifts"
+                  className={active('/category/photo-gifts') ? 'menu-active' : ''}
+                  aria-current={active('/category/photo-gifts') ? 'page' : undefined}
+                >
+                  Corporate Gifts
+                </Link>
+              </summary>
+              <div className="mega-menu">
+                <div>
+                  <Link href="/category/clothing">Corporate T-Shirts</Link>
+                  <Link href="/category/photo-gifts">Custom Mugs</Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Branded Pens
+                  </Link>
+                  <Link href="/category/stationery">Diaries & Notebooks</Link>
+                  <Link href="/category/photo-gifts">Keychains</Link>
+                  <Link href="/category/photo-gifts">Bottles & Tumblers</Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    ID Cards & Lanyards
+                  </Link>
+                  <Link href="/category/photo-gifts">Gift Sets</Link>
+                  <Link href="/contact">Employee Welcome Kits</Link>
+                  <Link href="/contact">Event & Conference Kits</Link>
+                </div>
+              </div>
+            </details>
+            <details className="menu-dropdown">
+              <summary>
+                <Link
+                  onClick={(event) => event.stopPropagation()}
+                  href="/category/business-printing"
+                  className={active('/category/business-printing') ? 'menu-active' : ''}
+                  aria-current={active('/category/business-printing') ? 'page' : undefined}
+                >
+                  Packaging
+                </Link>
+                <Link
+                  onClick={(event) => event.stopPropagation()}
+                  href="/category/business-printing"
+                  className="menu-direct"
+                >
+                  Promotional Products
+                </Link>
+              </summary>
+              <div className="mega-menu">
+                <div>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Disposable Coffee Cups
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Paper Cups
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Food Packaging
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Takeaway Boxes
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Paper Bags
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Product Boxes
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Custom Pouches
+                  </Link>
+                  <Link href="/category/stationery">Stickers & Labels</Link>
+                  <Link href="/category/stationery">Bottle & Jar Labels</Link>
+                  <Link href="/category/stationery">Thank You Cards</Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Packaging Sleeves
+                  </Link>
+                  <Link href="/category/stationery">Custom Printed Tissue Paper</Link>
+                </div>
+              </div>
+            </details>
+            <details className="menu-dropdown">
+              <summary>
+                <Link
+                  onClick={(event) => event.stopPropagation()}
+                  href="/category/business-printing"
+                  className={active('/category/business-printing') ? 'menu-active' : ''}
+                  aria-current={active('/category/business-printing') ? 'page' : undefined}
+                >
+                  Business Printing
+                </Link>
+              </summary>
+              <div className="mega-menu">
+                <div>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Logo Printing
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Brand Merchandise
+                  </Link>
+                  <Link href="/category/stationery">Office Stationery</Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Business Cards
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Letterheads & Envelopes
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Brochures & Flyers
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Posters & Banners
+                  </Link>
+                  <Link
+                    onClick={(event) => event.stopPropagation()}
+                    href="/category/business-printing"
+                  >
+                    Promotional Materials
+                  </Link>
+                </div>
+              </div>
+            </details>
+            <details className="menu-dropdown">
+              <summary>
+                <Link href="/category/photo-gifts">Collections</Link>
+              </summary>
+              <div className="mega-menu">
+                <div>
+                  <Link href="/product/classic-business-cards">Upload Your Design</Link>
+                  <Link href="/product/classic-business-cards">Add Logo</Link>
+                  <Link href="/product/photo-prints">Add Photo</Link>
+                  <Link href="/product/custom-notebooks">Add Text</Link>
+                  <Link href="/category/photo-gifts">Customize Product</Link>
+                </div>
+              </div>
+            </details>
+            <Link href="/category/photo-gifts">Collections</Link>
+            <Link
+              onClick={(event) => event.stopPropagation()}
+              href="/category/business-printing"
+              className="menu-offer"
+            >
+              Offers
+            </Link>
+          </nav>
+        </div>
+      </header>
+      {open && (
+        <div className="mobile-drawer">
+          <div className="drawer-scrim" onClick={() => setOpen(false)} />
+          <aside>
+            <div className="drawer-top">
+              <span className="brand-mark">
+                <span>PRINT</span>
+                <i>KART</i>
+                <b>®</b>
+              </span>
+              <button
+                className="icon-button"
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={21} />
+              </button>
+            </div>
+            <nav>
+              <Link href="/" onClick={() => setOpen(false)}>
+                Home
+              </Link>
+              <Link
+                onClick={(event) => event.stopPropagation()}
+                href="/category/business-printing"
+                onClick={() => setOpen(false)}
+              >
+                Business printing
+              </Link>
+              <Link href="/category/photo-gifts" onClick={() => setOpen(false)}>
+                Photo gifts
+              </Link>
+              <Link href="/category/clothing" onClick={() => setOpen(false)}>
+                Clothing
+              </Link>
+              <Link href="/category/stationery" onClick={() => setOpen(false)}>
+                Stationery
+              </Link>
+            </nav>
+          </aside>
+        </div>
+      )}
+    </>
+  )
+}
 
-export function Footer() { return <><footer className="footer"><div className="page-shell"><div className="footer-reference-brand"><Link href="/" className="brand-mark footer-brand" aria-label="PRINTKART24 home"><img src="/printkart24-logo.png" alt="Printkart24 Custom Gifts" /></Link><div className="footer-rule"/></div><div className="footer-top"><div><strong>About</strong><Link href="/about">Our story</Link><Link href="/contact">Press & contact</Link><Link href="/about">Careers</Link><Link href="/about">Our responsibility</Link></div><div><strong>Account</strong><Link href="/login">Sign in</Link><Link href="/register">Create account</Link><Link href="/orders">Track my order</Link><Link href="/shipping">Return policy</Link></div><div><strong>For creators</strong><Link href="/contact">Sell with PRINTKART24</Link><Link href="/contact">Creator program</Link><Link href="/faq">Guidelines</Link><Link href="/contact">Help</Link></div><div><strong>Explore</strong><Link href="/category/photo-gifts">Birthday Gifts</Link><Link href="/category/photo-gifts">Anniversary Gifts</Link><Link href="/category/photo-gifts">Wedding Gifts</Link><Link href="/category/photo-gifts">Couple Gifts</Link><Link href="/category/photo-gifts">Gifts for Him</Link><Link href="/category/photo-gifts">Gifts for Her</Link><Link href="/category/photo-gifts">Gifts for Kids</Link><Link href="/category/photo-gifts">Festival Gifts</Link><Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">Business printing</Link><Link href="/category/stationery">Ideas</Link><Link href="/contact">Support</Link></div></div><div className="footer-social"><a href="https://facebook.com/printkart24" target="_blank" rel="noreferrer" aria-label="Facebook"><Globe2 size={22}/></a><a href="https://instagram.com/printkart24" target="_blank" rel="noreferrer" aria-label="Instagram"><Camera size={22}/></a><a href="https://linkedin.com/company/printkart24" target="_blank" rel="noreferrer" aria-label="LinkedIn"><BriefcaseBusiness size={22}/></a><a href="tel:+918288811860" aria-label="Call PRINTKART24"><span className="footer-phone">+91 82888 11860</span></a></div><div className="footer-bottom"><span>© 2026 PRINTKART24. Made with intent.</span><span>Privacy · Terms · India</span></div></div></footer></> }
+export function Footer() {
+  return (
+    <>
+      <footer className="footer">
+        <div className="page-shell">
+          <div className="footer-reference-brand">
+            <Link href="/" className="brand-mark footer-brand" aria-label="PRINTKART24 home">
+              <img src="/printkart24-logo.png" alt="Printkart24 Custom Gifts" />
+            </Link>
+            <div className="footer-rule" />
+          </div>
+          <div className="footer-top">
+            <div>
+              <strong>About</strong>
+              <Link href="/about">Our story</Link>
+              <Link href="/contact">Press & contact</Link>
+              <Link href="/about">Careers</Link>
+              <Link href="/about">Our responsibility</Link>
+            </div>
+            <div>
+              <strong>Account</strong>
+              <Link href="/login">Sign in</Link>
+              <Link href="/register">Create account</Link>
+              <Link href="/orders">Track my order</Link>
+              <Link href="/shipping">Return policy</Link>
+            </div>
+            <div>
+              <strong>For creators</strong>
+              <Link href="/contact">Sell with PRINTKART24</Link>
+              <Link href="/contact">Creator program</Link>
+              <Link href="/faq">Guidelines</Link>
+              <Link href="/contact">Help</Link>
+            </div>
+            <div>
+              <strong>Explore</strong>
+              <Link href="/category/photo-gifts">Birthday Gifts</Link>
+              <Link href="/category/photo-gifts">Anniversary Gifts</Link>
+              <Link href="/category/photo-gifts">Wedding Gifts</Link>
+              <Link href="/category/photo-gifts">Couple Gifts</Link>
+              <Link href="/category/photo-gifts">Gifts for Him</Link>
+              <Link href="/category/photo-gifts">Gifts for Her</Link>
+              <Link href="/category/photo-gifts">Gifts for Kids</Link>
+              <Link href="/category/photo-gifts">Festival Gifts</Link>
+              <Link onClick={(event) => event.stopPropagation()} href="/category/business-printing">
+                Business printing
+              </Link>
+              <Link href="/category/stationery">Ideas</Link>
+              <Link href="/contact">Support</Link>
+            </div>
+          </div>
+          <div className="footer-social">
+            <a
+              href="https://facebook.com/printkart24"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+            >
+              <Globe2 size={22} />
+            </a>
+            <a
+              href="https://instagram.com/printkart24"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+            >
+              <Camera size={22} />
+            </a>
+            <a
+              href="https://linkedin.com/company/printkart24"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+            >
+              <BriefcaseBusiness size={22} />
+            </a>
+            <a href="tel:+918288811860" aria-label="Call PRINTKART24">
+              <span className="footer-phone">+91 82888 11860</span>
+            </a>
+          </div>
+          <div className="footer-bottom">
+            <span>© 2026 PRINTKART24. Made with intent.</span>
+            <span>Privacy · Terms · India</span>
+          </div>
+        </div>
+      </footer>
+    </>
+  )
+}
 
-export function WhatsAppButton() { const href = 'https://wa.me/918288811860?text=Hi%20PRINTKART%2C%20I%20need%20help%20with%20my%20order.'; return <a className="whatsapp-fab" href={href} target="_blank" rel="noreferrer" aria-label="Chat with PRINTKART24 on WhatsApp"><MessageCircle size={20} fill="currentColor" /><span>Chat with us</span></a> }
+export function WhatsAppButton() {
+  const href =
+    'https://wa.me/918288811860?text=Hi%20PRINTKART%2C%20I%20need%20help%20with%20my%20order.'
+  return (
+    <a
+      className="whatsapp-fab"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Chat with PRINTKART24 on WhatsApp"
+    >
+      <MessageCircle size={20} fill="currentColor" />
+      <span>Chat with us</span>
+    </a>
+  )
+}
 
-export function Rating({ rating, reviews }: { rating: number; reviews: number }) { return <span className="rating"><Star size={14} fill="currentColor"/> {rating} <small>({reviews})</small></span> }
+export function Rating({ rating, reviews }: { rating: number; reviews: number }) {
+  return (
+    <span className="rating">
+      <Star size={14} fill="currentColor" /> {rating} <small>({reviews})</small>
+    </span>
+  )
+}
 
-export function ProductCard({ product }: { product: Product }) { const [wishlist, setWishlist] = useWishlist(); const saved = wishlist.includes(product.slug); return <article className="catalog-card"><Link href={`/product/${product.slug}`} className="catalog-image"><img src={product.image} alt={product.name}/>{product.badge && <span className="product-badge">{product.badge}</span>}<button type="button" className={`favorite-button ${saved ? 'is-favorite' : ''}`} aria-label={`Save ${product.name}`} onClick={(event) => { event.preventDefault(); setWishlist(saved ? wishlist.filter((item) => item !== product.slug) : [...wishlist, product.slug]) }}><Heart size={18} fill={saved ? 'currentColor' : 'none'}/></button></Link><div className="catalog-info"><Link href={`/product/${product.slug}`}><h3>{product.name}</h3></Link><Rating rating={product.rating} reviews={product.reviews}/><div><strong>{formatPrice(product.price)}</strong>{product.originalPrice && <del>{formatPrice(product.originalPrice)}</del>}<small> onwards</small></div></div></article> }
+export function ProductCard({ product }: { product: Product }) {
+  const [wishlist, setWishlist] = useWishlist()
+  const saved = wishlist.includes(product.slug)
+  return (
+    <article className="catalog-card">
+      <Link href={`/product/${product.slug}`} className="catalog-image">
+        <img src={product.image} alt={product.name} />
+        {product.badge && <span className="product-badge">{product.badge}</span>}
+        <button
+          type="button"
+          className={`favorite-button ${saved ? 'is-favorite' : ''}`}
+          aria-label={`Save ${product.name}`}
+          onClick={(event) => {
+            event.preventDefault()
+            setWishlist(
+              saved
+                ? wishlist.filter((item) => item !== product.slug)
+                : [...wishlist, product.slug],
+            )
+          }}
+        >
+          <Heart size={18} fill={saved ? 'currentColor' : 'none'} />
+        </button>
+      </Link>
+      <div className="catalog-info">
+        <Link href={`/product/${product.slug}`}>
+          <h3>{product.name}</h3>
+        </Link>
+        <Rating rating={product.rating} reviews={product.reviews} />
+        <div>
+          <strong>{formatPrice(product.price)}</strong>
+          {product.originalPrice && <del>{formatPrice(product.originalPrice)}</del>}
+          <small> onwards</small>
+        </div>
+      </div>
+    </article>
+  )
+}
 
-export function ProductGrid({ products }: { products: Product[] }) { return <div className="catalog-grid">{products.map((product) => <ProductCard product={product} key={product.slug}/>)}</div> }
+export function ProductGrid({ products }: { products: Product[] }) {
+  return (
+    <div className="catalog-grid">
+      {products.map((product) => (
+        <ProductCard product={product} key={product.slug} />
+      ))}
+    </div>
+  )
+}
