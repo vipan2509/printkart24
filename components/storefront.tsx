@@ -75,230 +75,38 @@ export function Header() {
         </div>
         <div className="page-shell category-nav">
           <nav>
-            <details className="menu-dropdown">
-              <summary>
-                <Link
-                  href="/category/clothing"
-                  className={active('/category/clothing') ? 'menu-active' : ''}
-                  aria-current={active('/category/clothing') ? 'page' : undefined}
-                >
-                  Personalized Gifts
-                </Link>
-              </summary>
-              <div className="mega-menu">
-                <div>
-                  <Link href="/category/clothing">T-Shirts</Link>
-                  <Link href="/category/photo-gifts">Mugs</Link>
-                  <Link href="/category/stationery">Notebooks & Diaries</Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Pens
-                  </Link>
-                  <Link href="/category/photo-gifts">Keychains</Link>
-                  <Link href="/category/photo-gifts">Bottles & Tumblers</Link>
-                  <Link href="/category/stationery">Diaries</Link>
-                  <Link href="/category/clothing">Caps</Link>
-                  <Link href="/category/clothing">Bags & Tote Bags</Link>
-                  <Link href="/category/photo-gifts">Photo Frames</Link>
-                  <Link href="/category/photo-gifts">Cushions</Link>
-                  <Link href="/category/photo-gifts">Mobile Covers</Link>
-                  <Link href="/category/stationery">Mouse Pads</Link>
-                  <Link href="/category/stationery">Stickers & Labels</Link>
-                </div>
-              </div>
-            </details>
-            <details className="menu-dropdown">
-              <summary>
-                <Link
-                  href="/category/photo-gifts"
-                  className={active('/category/photo-gifts') ? 'menu-active' : ''}
-                  aria-current={active('/category/photo-gifts') ? 'page' : undefined}
-                >
-                  Corporate Gifts
-                </Link>
-              </summary>
-              <div className="mega-menu">
-                <div>
-                  <Link href="/category/clothing">Corporate T-Shirts</Link>
-                  <Link href="/category/photo-gifts">Custom Mugs</Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Branded Pens
-                  </Link>
-                  <Link href="/category/stationery">Diaries & Notebooks</Link>
-                  <Link href="/category/photo-gifts">Keychains</Link>
-                  <Link href="/category/photo-gifts">Bottles & Tumblers</Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    ID Cards & Lanyards
-                  </Link>
-                  <Link href="/category/photo-gifts">Gift Sets</Link>
-                  <Link href="/contact">Employee Welcome Kits</Link>
-                  <Link href="/contact">Event & Conference Kits</Link>
-                </div>
-              </div>
-            </details>
-            <details className="menu-dropdown">
-              <summary>
-                <Link
-                  onClick={(event) => event.stopPropagation()}
-                  href="/category/business-printing"
-                  className={active('/category/business-printing') ? 'menu-active' : ''}
-                  aria-current={active('/category/business-printing') ? 'page' : undefined}
-                >
-                  Packaging
-                </Link>
-                <Link
-                  onClick={(event) => event.stopPropagation()}
-                  href="/category/business-printing"
-                  className="menu-direct"
-                >
-                  Promotional Products
-                </Link>
-              </summary>
-              <div className="mega-menu">
-                <div>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Disposable Coffee Cups
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Paper Cups
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Food Packaging
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Takeaway Boxes
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Paper Bags
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Product Boxes
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Custom Pouches
-                  </Link>
-                  <Link href="/category/stationery">Stickers & Labels</Link>
-                  <Link href="/category/stationery">Bottle & Jar Labels</Link>
-                  <Link href="/category/stationery">Thank You Cards</Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Packaging Sleeves
-                  </Link>
-                  <Link href="/category/stationery">Custom Printed Tissue Paper</Link>
-                </div>
-              </div>
-            </details>
-            <details className="menu-dropdown">
-              <summary>
-                <Link
-                  onClick={(event) => event.stopPropagation()}
-                  href="/category/business-printing"
-                  className={active('/category/business-printing') ? 'menu-active' : ''}
-                  aria-current={active('/category/business-printing') ? 'page' : undefined}
-                >
-                  Business Printing
-                </Link>
-              </summary>
-              <div className="mega-menu">
-                <div>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Logo Printing
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Brand Merchandise
-                  </Link>
-                  <Link href="/category/stationery">Office Stationery</Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Business Cards
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Letterheads & Envelopes
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Brochures & Flyers
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Posters & Banners
-                  </Link>
-                  <Link
-                    onClick={(event) => event.stopPropagation()}
-                    href="/category/business-printing"
-                  >
-                    Promotional Materials
-                  </Link>
-                </div>
-              </div>
-            </details>
-            <details className="menu-dropdown">
-              <summary>
-                <Link href="/category/photo-gifts">Collections</Link>
-              </summary>
-              <div className="mega-menu">
-                <div>
-                  <Link href="/product/classic-business-cards">Upload Your Design</Link>
-                  <Link href="/product/classic-business-cards">Add Logo</Link>
-                  <Link href="/product/photo-prints">Add Photo</Link>
-                  <Link href="/product/custom-notebooks">Add Text</Link>
-                  <Link href="/category/photo-gifts">Customize Product</Link>
-                </div>
-              </div>
-            </details>
-            <Link href="/category/photo-gifts">Collections</Link>
             <Link
-              onClick={(event) => event.stopPropagation()}
               href="/category/business-printing"
-              className="menu-offer"
+              className={active('/category/business-printing') ? 'menu-active' : ''}
+              aria-current={active('/category/business-printing') ? 'page' : undefined}
             >
-              Offers
+              Business Printing
+            </Link>
+            <Link
+              href="/category/photo-gifts"
+              className={active('/category/photo-gifts') ? 'menu-active' : ''}
+              aria-current={active('/category/photo-gifts') ? 'page' : undefined}
+            >
+              Corporate Gifts
+            </Link>
+            <Link
+              href="/category/business-printing"
+              className={active('/category/business-printing') ? 'menu-active' : undefined}
+            >
+              Packaging
+            </Link>
+            <Link
+              href="/category/business-printing"
+              className={active('/category/business-printing') ? 'menu-active' : undefined}
+            >
+              Promotional Products
+            </Link>
+            <Link
+              href="/category/clothing"
+              className={active('/category/clothing') ? 'menu-active' : ''}
+              aria-current={active('/category/clothing') ? 'page' : undefined}
+            >
+              Personalized Gifts
             </Link>
           </nav>
         </div>
