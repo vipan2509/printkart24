@@ -19,21 +19,14 @@ export type Product = {
 }
 
 const images = {
-  cards:
-    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=85',
-  stationery:
-    'https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=1000&q=85',
-  clothing:
-    'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=85',
-  mug: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=1000&q=85',
-  frame:
-    'https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1000&q=85',
-  stickers:
-    'https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&w=1000&q=85',
-  packaging:
-    'https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?auto=format&fit=crop&w=1000&q=85',
-  invite:
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85',
+  cards: '/products/business-cards.png',
+  stationery: '/products/thank-you-cards.png',
+  clothing: '/products/tote-bag.png',
+  mug: '/products/photo-mug.png',
+  frame: '/products/gallery-wall-print.png',
+  stickers: '/products/die-cut-stickers.png',
+  packaging: '/products/branded-mailer-boxes.png',
+  invite: '/products/custom-invitations.png',
 }
 
 export const products: Product[] = [
