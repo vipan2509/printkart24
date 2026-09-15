@@ -1,222 +1,165 @@
 import Link from 'next/link'
-import { ArrowRight, Check, Package, Sparkles, Truck } from 'lucide-react'
+import { ArrowRight, Check, Package, ShieldCheck, Sparkles, Truck } from 'lucide-react'
 import { Footer, Header, ProductGrid } from '@/components/storefront'
 import { products } from '@/lib/catalog'
 
-const categoryTiles = [
-  {
-    slug: 'photo-gifts',
-    name: 'Photo gifts',
-    copy: 'Personalised moments',
-    image: '/products/photo-mug.png',
-  },
-  {
-    slug: 'business-printing',
-    name: 'Business printing',
-    copy: 'Build your brand',
-    image: '/products/business-cards.png',
-  },
-  {
-    slug: 'clothing',
-    name: 'Clothing & bags',
-    copy: 'Wear your ideas',
-    image: '/products/tote-bag.png',
-  },
-  {
-    slug: 'stationery',
-    name: 'Stationery',
-    copy: 'Make it memorable',
-    image: '/products/thank-you-cards.png',
-  },
+const shortcuts = [
+  ['T-Shirts', '/category/clothing', '/products/tote-bag.png'],
+  ['Mugs', '/category/photo-gifts', '/products/photo-mug.png'],
+  ['Business Cards', '/category/business-printing', '/products/business-cards.png'],
+  ['Stickers', '/category/stationery', '/products/die-cut-stickers.png'],
+  ['Invitations', '/category/photo-gifts', '/products/custom-invitations.png'],
+  ['Packaging', '/category/business-printing', '/products/branded-mailer-boxes.png'],
 ]
 
-const quickLinks = [
-  'Best sellers',
-  'Gifts for her',
-  'Gifts for him',
-  'Wedding stationery',
-  'Small business',
+const eventCategories = [
+  ['Weddings', '/category/photo-gifts', '/products/custom-invitations.png'],
+  ['Birthdays', '/category/photo-gifts', '/products/gallery-wall-print.png'],
+  ['Baby Showers', '/category/photo-gifts', '/products/thank-you-cards.png'],
 ]
+
+const seasonCategories = [
+  ['Hoodies & Sweatshirts', '/category/clothing', '/products/tote-bag.png'],
+  ['Cushions', '/category/photo-gifts', '/products/gallery-wall-print.png'],
+  ['Socks', '/category/clothing', '/products/die-cut-stickers.png'],
+  ['Fleece Blankets', '/category/photo-gifts', '/products/photo-mug.png'],
+]
+
+const popularCategories = [
+  ['Cards & Invitations', '/category/photo-gifts', '/products/custom-invitations.png'],
+  ['Gift Wrap & Party Supplies', '/category/stationery', '/products/thank-you-cards.png'],
+  ['Sports & Games', '/category/clothing', '/products/die-cut-stickers.png'],
+  ['Accessories', '/category/clothing', '/products/tote-bag.png'],
+  ['Home Decor', '/category/photo-gifts', '/products/gallery-wall-print.png'],
+  ['Create Your Own', '/category/business-printing', '/products/business-cards.png'],
+]
+
+function ImageRow({
+  title,
+  items,
+  className = '',
+}: {
+  title: string
+  items: string[][]
+  className?: string
+}) {
+  return (
+    <section className={`reference-section ${className}`}>
+      <div className="reference-section-heading">
+        <h2>{title}</h2>
+        <Link href="/search?q=popular">
+          View all <ArrowRight size={14} />
+        </Link>
+      </div>
+      <div className="reference-card-row">
+        {items.map(([name, href, image]) => (
+          <Link href={href} className="reference-card" key={name}>
+            <img src={image} alt={name} />
+            <span>{name}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
 
 export default function Home() {
   return (
     <>
+      <div className="reference-promo-bar">
+        Save up to 30% on custom products <span>Shop now →</span>
+      </div>
       <Header />
-      <main className="marketplace-home">
-        <section className="market-hero marketplace-hero">
-          <div className="page-shell marketplace-hero-inner">
-            <div className="marketplace-hero-copy">
-              <div className="eyebrow">
-                <Sparkles size={15} /> MADE FOR YOUR MOMENTS
-              </div>
-              <h1 className="display-title">
-                Make it personal.
-                <br />
-                <span>Make it yours.</span>
-              </h1>
-              <p className="hero-copy">
-                Create gifts, stationery, clothing, and business essentials designed by you and made
-                to be remembered.
-              </p>
-              <div className="hero-actions">
-                <Link href="/category/photo-gifts" className="button-primary">
-                  Start creating <ArrowRight size={17} />
-                </Link>
-                <Link href="/search?q=bestsellers" className="button-quiet">
-                  Shop bestsellers
-                </Link>
-              </div>
-              <div className="trust-row">
-                <span>
-                  <Check size={15} /> Easy online personalisation
-                </span>
-                <span>
-                  <Truck size={15} /> Delivered across India
-                </span>
-              </div>
-            </div>
-            <div className="marketplace-hero-collage">
-              <img
-                className="hero-collage-main"
-                src="/products/custom-invitations.png"
-                alt="Personalised invitations and stationery"
-              />
-              <img
-                className="hero-collage-small"
-                src="/products/die-cut-stickers.png"
-                alt="Custom colourful stickers"
-              />
-              <div className="hero-collage-note">
-                <strong>YOUR IDEA.</strong>
-                <br />
-                OUR PRINT.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="quick-links-bar">
-          <div className="page-shell quick-links-inner">
-            <strong>Explore popular:</strong>
-            {quickLinks.map((link) => (
-              <Link key={link} href={`/search?q=${encodeURIComponent(link)}`}>
-                {link}
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="page-shell section-pad">
-          <div className="section-heading">
+      <main className="reference-home">
+        <section className="reference-hero">
+          <div className="reference-hero-content">
             <div>
-              <div className="eyebrow">SHOP YOUR WAY</div>
-              <h2 className="section-title">
-                Something special
-                <br />
-                <span>for everyone.</span>
-              </h2>
-            </div>
-            <Link href="/category/photo-gifts" className="text-link">
-              Explore all <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="category-grid marketplace-category-grid">
-            {categoryTiles.map((tile) => (
-              <Link href={`/category/${tile.slug}`} className="category-card" key={tile.slug}>
-                <img src={tile.image} alt={tile.name} />
-                <div>
-                  <small>{tile.copy}</small>
-                  <strong>{tile.name}</strong>
-                  <span>
-                    Shop now <ArrowRight size={14} />
-                  </span>
-                </div>
+              <p className="reference-kicker">PRINTKART24 WEDDINGS</p>
+              <h1>Create Your Dream Day</h1>
+              <p>Save up to 25% on wedding invitations and save the dates.</p>
+              <Link href="/category/photo-gifts" className="reference-dark-button">
+                Shop now
               </Link>
-            ))}
+            </div>
+            <img
+              src="/products/custom-invitations.png"
+              alt="Custom wedding invitations and stationery"
+            />
           </div>
         </section>
-
-        <section className="product-section">
-          <div className="page-shell section-pad">
-            <div className="section-heading">
+        <div className="reference-content">
+          <section className="welcome-section">
+            <h2>Welcome back, vipan!</h2>
+            <p>Made since 2026</p>
+            <div className="reference-circle-row">
+              {shortcuts.map(([name, href, image]) => (
+                <Link href={href} key={name}>
+                  <img src={image} alt={name} />
+                  <span>{name}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+          <ImageRow title="Shop for your event" items={eventCategories} />
+          <ImageRow title="New season essentials" items={seasonCategories} />
+          <section className="reference-section">
+            <div className="reference-section-heading">
+              <h2>More popular categories</h2>
+            </div>
+            <div className="reference-category-grid">
+              {popularCategories.map(([name, href, image]) => (
+                <Link href={href} className="reference-wide-card" key={name}>
+                  <img src={image} alt={name} />
+                  <span>{name}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+          <section className="creator-banner">
+            <img src="/products/branded-mailer-boxes.png" alt="Create products for your business" />
+            <div>
+              <h2>Sell on PrintKart24</h2>
+              <p>Become a PrintKart24 creator and make money from your designs.</p>
+              <Link href="/contact" className="reference-dark-button">
+                Learn more
+              </Link>
+            </div>
+          </section>
+          <ImageRow title="Featured collections" items={shortcuts.slice(0, 6)} />
+          <section className="promise-section">
+            <h2>The PrintKart24 promise</h2>
+            <div className="promise-grid">
               <div>
-                <div className="eyebrow">TRENDING NOW</div>
-                <h2 className="section-title">
-                  Made to be <span>loved.</span>
-                </h2>
+                <Package />
+                <h3>Order with confidence</h3>
+                <p>Quality printing and thoughtful packaging.</p>
               </div>
-              <Link href="/search?q=" className="text-link">
-                See all products <ArrowRight size={16} />
-              </Link>
+              <div>
+                <Truck />
+                <h3>Easy delivery</h3>
+                <p>We deliver your custom ideas across India.</p>
+              </div>
+              <div>
+                <ShieldCheck />
+                <h3>Secure shopping</h3>
+                <p>Your details and orders are always protected.</p>
+              </div>
             </div>
-            <ProductGrid products={products.filter((product) => product.popular)} />
-          </div>
-        </section>
-
-        <section className="page-shell section-pad">
-          <div className="bundle-panel marketplace-feature-panel">
-            <div className="bundle-copy">
-              <div className="eyebrow">FOR SMALL BUSINESSES</div>
-              <h2 className="section-title">
-                Your brand,
-                <br />
-                <em>beautifully made.</em>
-              </h2>
-              <p>
-                Bring your business to life with cards, stickers, packaging, and thoughtful details
-                that make every order feel like yours.
-              </p>
-              <Link href="/category/business-printing" className="button-dark">
-                Shop business printing <ArrowRight size={17} />
-              </Link>
-            </div>
-            <div className="bundle-images">
-              <img
-                src="/products/branded-mailer-boxes.png"
-                alt="Branded mailer boxes for small businesses"
+          </section>
+          <section className="newsletter-section">
+            <Sparkles size={18} />
+            <h2>Get exclusive offers</h2>
+            <p>Be first to hear about new products and special savings.</p>
+            <form>
+              <input
+                type="email"
+                placeholder="Your email address"
+                aria-label="Your email address"
               />
-              <div className="bundle-tag">
-                MADE
-                <br />
-                <strong>FOR YOU</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="proof-section">
-          <div className="page-shell section-pad">
-            <div className="center-heading">
-              <div className="eyebrow">WHY PRINTKART24</div>
-              <h2 className="section-title">
-                Personal should
-                <br />
-                <span>feel effortless.</span>
-              </h2>
-              <p>
-                From your first idea to the final delivery, we make creating custom products simple,
-                joyful, and reliable.
-              </p>
-            </div>
-            <div className="proof-grid">
-              <div className="proof-card">
-                <Package size={26} />
-                <h3>Made to arrive happy</h3>
-                <p>Carefully packed and delivered to your door, anywhere in India.</p>
-              </div>
-              <div className="proof-card">
-                <Sparkles size={26} />
-                <h3>Quality you can feel</h3>
-                <p>Beautiful papers, vivid colour, and finishes that get noticed.</p>
-              </div>
-              <div className="proof-card">
-                <Truck size={26} />
-                <h3>Ideas welcome here</h3>
-                <p>Easy tools and real humans when you need a creative nudge.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+              <button type="submit">Sign up now</button>
+            </form>
+          </section>
+        </div>
       </main>
       <Footer />
     </>
