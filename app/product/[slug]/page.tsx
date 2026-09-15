@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Footer, Header } from '@/components/storefront'
 import { getProduct, products } from '@/lib/catalog'
-import { ProductCustomizer } from '@/components/product-customizer'
+import { ProductCustomizer, ProductDetailExtras } from '@/components/product-customizer'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -24,6 +24,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <a href={`/category/${product.category}`}>{product.categoryLabel}</a> / {product.name}
         </div>
         <ProductCustomizer product={product} />
+        <ProductDetailExtras product={product} />
         <section className="related section-pad">
           <div className="section-heading">
             <div>

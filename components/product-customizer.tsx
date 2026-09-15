@@ -169,3 +169,96 @@ export function ProductCustomizer({ product }: { product: Product }) {
     </div>
   )
 }
+
+export function ProductDetailExtras({ product }: { product: Product }) {
+  const recommendations = [
+    { label: 'Classic finish', image: product.image },
+    { label: 'Premium finish', image: product.gallery[0] ?? product.image },
+    { label: 'Gift-ready set', image: product.image },
+    { label: 'Desk essentials', image: product.gallery[0] ?? product.image },
+  ]
+
+  return (
+    <div className="product-detail-extras">
+      <section className="detail-rail">
+        <div className="detail-section-heading">
+          <div>
+            <span className="eyebrow">CURATED FOR YOU</span>
+            <h2>Other designs you might like</h2>
+          </div>
+          <a href={`/category/${product.category}`}>View all</a>
+        </div>
+        <div className="detail-recommendations">
+          {recommendations.map((item) => (
+            <a href={`/category/${product.category}`} key={item.label}>
+              <img src={item.image} alt="" />
+              <strong>{item.label}</strong>
+              <span>From {formatPrice(product.price)}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="detail-info-grid">
+        <div>
+          <span className="eyebrow">ABOUT {product.categoryLabel.toUpperCase()}</span>
+          <h2>Made for your everyday moments</h2>
+          <p>
+            {product.description} Designed with thoughtful details and printed to order in India.
+          </p>
+          <ul>
+            <li>Premium materials and vibrant, lasting color</li>
+            <li>Personalize with your message or artwork</li>
+            <li>Carefully checked before it leaves our studio</li>
+            <li>Made to order with less unnecessary waste</li>
+          </ul>
+        </div>
+        <div>
+          <span className="eyebrow">ABOUT THIS DESIGN</span>
+          <h2>Make it unmistakably yours</h2>
+          <p>
+            Choose a finish, add your words, and upload a photo when your design needs a personal
+            touch.
+          </p>
+          <button type="button" className="button-secondary">
+            Contact us
+          </button>
+        </div>
+      </section>
+
+      <section className="detail-review-section">
+        <div className="review-summary">
+          <span className="eyebrow">CUSTOMER REVIEWS</span>
+          <strong>{product.rating}</strong>
+          <span className="stars">★★★★★</span>
+          <small>{product.reviews.toLocaleString()} verified reviews</small>
+        </div>
+        <div className="review-list">
+          {[
+            'Beautiful quality and exactly what I imagined.',
+            'The finish feels premium and delivery was smooth.',
+            'A thoughtful gift that arrived looking wonderful.',
+          ].map((review) => (
+            <article key={review}>
+              <span className="stars">★★★★★</span>
+              <strong>Verified purchase</strong>
+              <p>{review}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="detail-newsletter">
+        <span className="eyebrow">STAY IN THE LOOP</span>
+        <h2>Get exclusive offers</h2>
+        <p>New products, design inspiration, and offers from PRINTKART24.</p>
+        <form>
+          <input type="email" placeholder="Your email address" aria-label="Your email address" />
+          <button type="submit" className="button-primary">
+            Sign up now
+          </button>
+        </form>
+      </section>
+    </div>
+  )
+}
