@@ -700,6 +700,57 @@ button {
   font-size: 11px;
 }
 /* catalog and checkout */
+.business-printing-page .collection-strip {
+  max-width: 980px;
+  margin: 0 auto;
+  gap: 18px;
+  padding-top: 18px;
+}
+.business-printing-page .collection-circle {
+  flex-basis: 92px;
+  gap: 8px;
+}
+.business-printing-page .collection-circle img {
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+}
+.business-printing-page .marketplace-heading {
+  max-width: 980px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.business-printing-page .filter-bar {
+  max-width: 980px;
+  margin: 0 auto;
+  border-block: 1px solid var(--border);
+}
+.business-printing-page .marketplace-grid {
+  max-width: 980px;
+  margin: 22px auto 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 14px;
+}
+.business-printing-page .marketplace-grid .catalog-card {
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+.business-printing-page .marketplace-grid .catalog-image {
+  border-radius: 0;
+}
+.business-printing-page .marketplace-grid .catalog-info {
+  padding: 10px 12px 13px;
+}
+.business-printing-page .marketplace-grid .catalog-title {
+  font-size: 13px;
+}
+.business-printing-page .marketplace-grid .catalog-description {
+  font-size: 11px;
+  line-height: 1.35;
+}
 .category-marketplace {
   padding: 0 0 90px;
 }

@@ -30,6 +30,54 @@ const images = {
 }
 
 export const products: Product[] = [
+  ...[
+    ['modern-business-cards', 'Modern Business Cards', 299, images.cards, 'Best seller'],
+    ['custom-flyers', 'Custom Flyers', 399, '/products/business-printing-flyers.png', 'Popular'],
+    [
+      'folded-brochures',
+      'Folded Brochures',
+      549,
+      '/products/business-printing-brochures.png',
+      undefined,
+    ],
+    ['event-posters', 'Event Posters', 649, '/products/business-printing-posters.png', 'New'],
+    [
+      'display-banners',
+      'Display Banners',
+      1299,
+      '/products/business-printing-banners.png',
+      undefined,
+    ],
+    ['product-labels', 'Product Labels', 449, '/products/business-printing-labels.png', undefined],
+    [
+      'branded-letterheads',
+      'Branded Letterheads',
+      499,
+      '/products/business-printing-letterheads.png',
+      undefined,
+    ],
+    [
+      'custom-packaging',
+      'Custom Packaging',
+      899,
+      '/products/business-printing-packaging.png',
+      'Trending',
+    ],
+  ].map(([slug, name, price, image, badge]) => ({
+    slug: slug as string,
+    name: name as string,
+    category: 'business-printing' as const,
+    categoryLabel: 'Business Printing',
+    price: price as number,
+    rating: 4.8,
+    reviews: 120,
+    image: image as string,
+    gallery: [image as string],
+    description: 'Professional printed products designed to help your business stand out.',
+    badge: badge as string | undefined,
+    options: ['Standard', 'Premium', 'Recycled'],
+    material: 'Premium printed stock',
+  })),
   {
     slug: 'classic-business-cards',
     name: 'Classic Business Cards',
