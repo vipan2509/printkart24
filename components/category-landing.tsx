@@ -10,31 +10,14 @@ import { ProductCard } from '@/components/storefront'
 
 const categorySubcategories: Record<string, { label: string; image: string }[]> = {
   'Business Printing': [
-    {
-      label: 'Business cards',
-      image:
-        'https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=400&q=80',
-    },
-    {
-      label: 'Flyers',
-      image:
-        'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=400&q=80',
-    },
-    {
-      label: 'Brochures',
-      image:
-        'https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&w=400&q=80',
-    },
-    {
-      label: 'Posters',
-      image:
-        'https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80',
-    },
-    {
-      label: 'Banners',
-      image:
-        'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=400&q=80',
-    },
+    { label: 'Business cards', image: '/products/business-printing-cards.png' },
+    { label: 'Flyers', image: '/products/business-printing-flyers.png' },
+    { label: 'Brochures', image: '/products/business-printing-brochures.png' },
+    { label: 'Posters', image: '/products/business-printing-posters.png' },
+    { label: 'Banners', image: '/products/business-printing-banners.png' },
+    { label: 'Labels', image: '/products/business-printing-labels.png' },
+    { label: 'Letterheads', image: '/products/business-printing-letterheads.png' },
+    { label: 'Packaging', image: '/products/business-printing-packaging.png' },
   ],
   'Photo Gifts': [
     {
@@ -145,7 +128,9 @@ export function CategoryLanding({ title, products }: { title: string; products: 
     setActiveFilter((current) => (current === name ? null : name))
   const subcategories = categorySubcategories[title] ?? categorySubcategories['Photo Gifts']
   return (
-    <div className="category-marketplace">
+    <div
+      className={`category-marketplace ${title === 'Business Printing' ? 'business-printing-page' : ''}`}
+    >
       <div className="collection-strip" id="collections" aria-label={`${title} subcategories`}>
         {subcategories.map((subcategory) => (
           <Link href="#products" className="collection-circle" key={subcategory.label}>
