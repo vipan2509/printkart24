@@ -12,17 +12,7 @@
   --font-sans: var(--font-body);
   --font-serif: var(--font-display);
 }
-:root {
-  color-scheme: light;
-  --background: #fbfaf7;
-  --foreground: #182027;
-  --primary: #2354d7;
-  --muted-foreground: #667078;
-  --border: #e4e5e1;
-  --accent: #f6b73c;
-  --font-body: Arial, 'Helvetica Neue', sans-serif;
-  --font-display: Georgia, 'Times New Roman', serif;
-}
+
 * {
   box-sizing: border-box;
 }
@@ -2240,6 +2230,137 @@ button {
 }
 .whatsapp-fab span {
   white-space: nowrap;
+}
+
+/* Zazzle-inspired marketplace homepage treatment */
+.marketplace-hero {
+  background: #e9efff;
+}
+.marketplace-hero-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+  padding: 72px 0 84px;
+}
+.marketplace-hero-copy {
+  max-width: 560px;
+}
+.marketplace-hero-collage {
+  position: relative;
+  min-height: 450px;
+}
+.hero-collage-main {
+  position: absolute;
+  inset: 0 0 0 8%;
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 18px 22px 0 #c9d4f5;
+}
+.hero-collage-small {
+  position: absolute;
+  right: 0;
+  bottom: -28px;
+  width: 34%;
+  height: 42%;
+  object-fit: cover;
+  border: 10px solid #fff;
+  border-radius: 12px;
+  box-shadow: 0 14px 28px rgba(24, 32, 39, 0.16);
+}
+.hero-collage-note {
+  position: absolute;
+  top: 30px;
+  right: 4%;
+  padding: 14px 16px;
+  background: #f6b73c;
+  color: #182027;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  transform: rotate(5deg);
+  box-shadow: 5px 6px 0 rgba(24, 32, 39, 0.14);
+}
+.quick-links-bar {
+  border-block: 1px solid var(--border);
+  background: #fff;
+}
+.quick-links-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  min-height: 58px;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.quick-links-inner strong {
+  color: var(--primary);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.quick-links-inner a {
+  color: var(--muted-foreground);
+}
+.quick-links-inner a:hover {
+  color: var(--primary);
+}
+.marketplace-category-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+.marketplace-category-grid .category-card {
+  height: 330px;
+}
+.marketplace-category-grid .category-card > div {
+  padding-bottom: 20px;
+}
+.marketplace-category-grid .category-card span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.marketplace-feature-panel {
+  background: #f7d9b7;
+}
+@media (max-width: 800px) {
+  .marketplace-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 48px 0 64px;
+  }
+  .marketplace-hero-collage {
+    min-height: 330px;
+  }
+  .marketplace-category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .marketplace-category-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .marketplace-category-grid .category-card {
+    height: 230px;
+  }
+  .quick-links-inner {
+    justify-content: flex-start;
+    gap: 18px;
+  }
+  .hero-collage-main {
+    left: 0;
+    width: 88%;
+  }
+  .hero-collage-small {
+    width: 38%;
+  }
 }
 @media (max-width: 640px) {
   .whatsapp-fab {

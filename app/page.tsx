@@ -6,168 +6,196 @@ import { products } from '@/lib/catalog'
 const categoryTiles = [
   {
     slug: 'photo-gifts',
-    name: 'Photo Gifts',
-    copy: 'Turn memories into keepsakes',
-    image:
-      'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=900&q=85',
+    name: 'Photo gifts',
+    copy: 'Personalised moments',
+    image: '/products/photo-mug.png',
   },
   {
     slug: 'business-printing',
-    name: 'Business Printing',
-    copy: 'Make your brand memorable',
-    image:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85',
+    name: 'Business printing',
+    copy: 'Build your brand',
+    image: '/products/business-cards.png',
   },
   {
     slug: 'clothing',
-    name: 'Clothing',
-    copy: 'Wear what you believe in',
-    image:
-      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85',
+    name: 'Clothing & bags',
+    copy: 'Wear your ideas',
+    image: '/products/tote-bag.png',
   },
   {
     slug: 'stationery',
     name: 'Stationery',
-    copy: 'Make every note count',
-    image:
-      'https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=900&q=85',
+    copy: 'Make it memorable',
+    image: '/products/thank-you-cards.png',
   },
+]
+
+const quickLinks = [
+  'Best sellers',
+  'Gifts for her',
+  'Gifts for him',
+  'Wedding stationery',
+  'Small business',
 ]
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main>
-        <section className="market-hero">
-          <div className="page-shell hero-grid">
-            <div>
+      <main className="marketplace-home">
+        <section className="market-hero marketplace-hero">
+          <div className="page-shell marketplace-hero-inner">
+            <div className="marketplace-hero-copy">
               <div className="eyebrow">
-                <Sparkles size={15} /> MAKE IT YOURS
+                <Sparkles size={15} /> MADE FOR YOUR MOMENTS
               </div>
               <h1 className="display-title">
-                Small prints.
+                Make it personal.
                 <br />
-                <span>Big feeling.</span>
+                <span>Make it yours.</span>
               </h1>
               <p className="hero-copy">
-                Create thoughtful photo gifts, standout business essentials, and everyday pieces
-                that feel completely yours.
+                Create gifts, stationery, clothing, and business essentials designed by you and made
+                to be remembered.
               </p>
               <div className="hero-actions">
                 <Link href="/category/photo-gifts" className="button-primary">
                   Start creating <ArrowRight size={17} />
                 </Link>
                 <Link href="/search?q=bestsellers" className="button-quiet">
-                  Explore bestsellers
+                  Shop bestsellers
                 </Link>
               </div>
               <div className="trust-row">
                 <span>
-                  <Check size={15} /> Easy customization
+                  <Check size={15} /> Easy online personalisation
                 </span>
                 <span>
-                  <Truck size={15} /> Ships across India
+                  <Truck size={15} /> Delivered across India
                 </span>
               </div>
             </div>
-            <div className="hero-art">
+            <div className="marketplace-hero-collage">
               <img
-                src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1400&q=90"
-                alt="Printed stationery and packaging arranged on a desk"
+                className="hero-collage-main"
+                src="/products/custom-invitations.png"
+                alt="Personalised invitations and stationery"
               />
-              <div className="hero-sticker">
-                PRINT
+              <img
+                className="hero-collage-small"
+                src="/products/die-cut-stickers.png"
+                alt="Custom colourful stickers"
+              />
+              <div className="hero-collage-note">
+                <strong>YOUR IDEA.</strong>
                 <br />
-                <strong>GOOD</strong>
-                <br />
-                <span>THINGS</span>
+                OUR PRINT.
               </div>
             </div>
           </div>
         </section>
+
+        <section className="quick-links-bar">
+          <div className="page-shell quick-links-inner">
+            <strong>Explore popular:</strong>
+            {quickLinks.map((link) => (
+              <Link key={link} href={`/search?q=${encodeURIComponent(link)}`}>
+                {link}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <section className="page-shell section-pad">
           <div className="section-heading">
             <div>
-              <div className="eyebrow">SHOP BY CATEGORY</div>
+              <div className="eyebrow">SHOP YOUR WAY</div>
               <h2 className="section-title">
-                Find your kind of
+                Something special
                 <br />
-                <span>special.</span>
+                <span>for everyone.</span>
               </h2>
             </div>
             <Link href="/category/photo-gifts" className="text-link">
-              View all categories <ArrowRight size={16} />
+              Explore all <ArrowRight size={16} />
             </Link>
           </div>
-          <div className="category-grid">
+          <div className="category-grid marketplace-category-grid">
             {categoryTiles.map((tile) => (
               <Link href={`/category/${tile.slug}`} className="category-card" key={tile.slug}>
-                <img src={tile.image} alt="" />
+                <img src={tile.image} alt={tile.name} />
                 <div>
                   <small>{tile.copy}</small>
                   <strong>{tile.name}</strong>
+                  <span>
+                    Shop now <ArrowRight size={14} />
+                  </span>
                 </div>
               </Link>
             ))}
           </div>
         </section>
+
         <section className="product-section">
           <div className="page-shell section-pad">
             <div className="section-heading">
               <div>
-                <div className="eyebrow">PEOPLE ARE LOVING</div>
-                <h2 className="section-title">The good stuff.</h2>
+                <div className="eyebrow">TRENDING NOW</div>
+                <h2 className="section-title">
+                  Made to be <span>loved.</span>
+                </h2>
               </div>
               <Link href="/search?q=" className="text-link">
-                Shop all products <ArrowRight size={16} />
+                See all products <ArrowRight size={16} />
               </Link>
             </div>
             <ProductGrid products={products.filter((product) => product.popular)} />
           </div>
         </section>
+
         <section className="page-shell section-pad">
-          <div className="bundle-panel">
+          <div className="bundle-panel marketplace-feature-panel">
             <div className="bundle-copy">
-              <div className="eyebrow">THE LITTLE BUSINESS BUNDLE</div>
+              <div className="eyebrow">FOR SMALL BUSINESSES</div>
               <h2 className="section-title">
-                Look like you
+                Your brand,
                 <br />
-                <em>mean business.</em>
+                <em>beautifully made.</em>
               </h2>
               <p>
-                Everything you need to make your next launch feel like a launch: cards, stickers,
-                thank you notes, and a box full of confidence.
+                Bring your business to life with cards, stickers, packaging, and thoughtful details
+                that make every order feel like yours.
               </p>
-              <Link href="/product/classic-business-cards" className="button-dark">
-                Build your bundle <ArrowRight size={17} />
+              <Link href="/category/business-printing" className="button-dark">
+                Shop business printing <ArrowRight size={17} />
               </Link>
             </div>
             <div className="bundle-images">
               <img
-                src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?auto=format&fit=crop&w=1000&q=85"
-                alt="Branded stationery and packaging for a small business"
+                src="/products/branded-mailer-boxes.png"
+                alt="Branded mailer boxes for small businesses"
               />
               <div className="bundle-tag">
-                SAVE
+                MADE
                 <br />
-                <strong>15%</strong>
+                <strong>FOR YOU</strong>
               </div>
             </div>
           </div>
         </section>
+
         <section className="proof-section">
           <div className="page-shell section-pad">
             <div className="center-heading">
-              <div className="eyebrow">WHY PRINTKART</div>
+              <div className="eyebrow">WHY PRINTKART24</div>
               <h2 className="section-title">
-                Good design should
+                Personal should
                 <br />
-                <span>feel good too.</span>
+                <span>feel effortless.</span>
               </h2>
               <p>
-                From the first click to the final unboxing, we keep printing simple, thoughtful, and
-                a little more joyful.
+                From your first idea to the final delivery, we make creating custom products simple,
+                joyful, and reliable.
               </p>
             </div>
             <div className="proof-grid">
