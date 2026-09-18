@@ -1,0 +1,61 @@
+// ==========================================
+// PRINTKART24 — RESPONSIVE BREAKPOINTS
+// ==========================================
+
+$bp-mobile-sm: 375px;
+$bp-mobile-md: 390px;
+$bp-mobile-lg: 414px;
+$bp-tablet: 768px;
+$bp-desktop-sm: 1024px;
+$bp-desktop-md: 1280px;
+$bp-desktop-lg: 1440px;
+$bp-desktop-xl: 1920px;
+
+@mixin up-to($breakpoint) {
+  @media (max-width: ($breakpoint - 1px)) {
+    @content;
+  }
+}
+
+@mixin from($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin between($min-bp, $max-bp) {
+  @media (min-width: $min-bp) and (max-width: ($max-bp - 1px)) {
+    @content;
+  }
+}
+
+// Semantic Shortcuts
+@mixin mobile-only {
+  @include up-to($bp-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @include between($bp-tablet, $bp-desktop-sm) {
+    @content;
+  }
+}
+
+@mixin tablet-and-down {
+  @include up-to($bp-desktop-sm) {
+    @content;
+  }
+}
+
+@mixin desktop-and-up {
+  @include from($bp-desktop-sm) {
+    @content;
+  }
+}
+
+@mixin wide-desktop {
+  @include from($bp-desktop-lg) {
+    @content;
+  }
+}

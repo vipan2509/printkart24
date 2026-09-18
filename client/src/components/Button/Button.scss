@@ -1,0 +1,86 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pk-button {
+  @include interactive-button;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  padding: 0.625rem 1.25rem;
+  border-radius: $radius-md;
+  box-shadow: $shadow-xs;
+  position: relative;
+  overflow: hidden;
+
+  &--primary {
+    background-color: $color-blue-primary;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-blue-hover;
+      box-shadow: $shadow-brand-glow;
+    }
+  }
+
+  &--secondary {
+    background-color: $color-navy-dark;
+    color: $color-white;
+
+    &:hover {
+      background-color: lighten($color-navy-dark, 8%);
+    }
+  }
+
+  &--accent {
+    background-color: $color-magenta;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-magenta-hover;
+      box-shadow: $shadow-magenta-glow;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: $color-text-primary;
+    border: 1px solid $color-border-dark;
+
+    &:hover {
+      background-color: $color-light-bg;
+      border-color: $color-blue-primary;
+      color: $color-blue-primary;
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: $color-text-secondary;
+    box-shadow: none;
+
+    &:hover {
+      background-color: $color-surface-hover;
+      color: $color-text-primary;
+    }
+  }
+
+  // Sizes
+  &--sm {
+    padding: 0.375rem 0.875rem;
+    font-size: $font-size-xs;
+  }
+
+  &--lg {
+    padding: 0.875rem 1.75rem;
+    font-size: $font-size-base;
+    border-radius: $radius-lg;
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--loading {
+    cursor: wait;
+    opacity: 0.8;
+  }
+}

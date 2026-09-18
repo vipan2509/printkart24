@@ -1,0 +1,211 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pk-product-card {
+  @include card-base;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: $color-white;
+
+  // Image Container
+  &__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 85%; // Aspect ratio
+    overflow: hidden;
+    background-color: $color-light-bg;
+
+    .product-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-slow, opacity $transition-normal;
+
+      &--primary {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      &--secondary {
+        opacity: 0;
+        z-index: 2;
+      }
+    }
+
+    &:hover {
+      .product-image--primary {
+        transform: scale(1.04);
+      }
+      .product-image--secondary {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+      .quick-actions-overlay {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // Top badges
+    .card-badges {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    // Wishlist Button
+    .wishlist-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      z-index: 10;
+      width: 34px;
+      height: 34px;
+      border-radius: $radius-full;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      box-shadow: $shadow-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-navy-dark;
+      transition: all $transition-fast;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-white;
+        color: $color-magenta;
+        transform: scale(1.1);
+      }
+
+      &--active {
+        color: $color-magenta !important;
+        background-color: $color-white;
+      }
+    }
+
+    // Hover Quick Action bar
+    .quick-actions-overlay {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      right: 0.75rem;
+      z-index: 10;
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all $transition-normal;
+    }
+  }
+
+  // Card Content
+  &__content {
+    padding: $spacing-4;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__category {
+    font-size: $font-size-xs;
+    color: $color-blue-primary;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $color-navy-dark;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    @include truncate-2;
+
+    a {
+      &:hover {
+        color: $color-blue-primary;
+      }
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+
+    .stars {
+      display: flex;
+      color: $color-warning;
+    }
+
+    .rating-val {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      color: $color-text-primary;
+    }
+
+    .review-count {
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+    }
+  }
+
+  &__pricing {
+    margin-top: auto;
+    margin-bottom: $spacing-4;
+
+    .starting-label {
+      font-size: 0.7rem;
+      color: $color-text-muted;
+      text-transform: uppercase;
+      font-weight: $font-weight-medium;
+      display: block;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+
+      .current-price {
+        font-family: $font-family-heading;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $color-navy-dark;
+      }
+
+      .original-price {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+        text-decoration: line-through;
+      }
+
+      .discount-tag {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        color: $color-magenta;
+      }
+    }
+  }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+}

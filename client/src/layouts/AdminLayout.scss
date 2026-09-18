@@ -1,0 +1,157 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/breakpoints' as *;
+
+.pk-admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F1F5F9;
+
+  &__sidebar {
+    width: 260px;
+    background-color: $color-navy-dark;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+    @include mobile-only {
+      display: none; // or collapsible
+    }
+
+    .sidebar-header {
+      padding: $spacing-6;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .brand-title {
+        font-family: $font-family-display;
+        font-size: 1.25rem;
+        font-weight: $font-weight-extrabold;
+        color: $color-white;
+
+        span.highlight {
+          color: $color-magenta;
+        }
+      }
+
+      .admin-tag {
+        font-size: 0.65rem;
+        background: rgba(225, 29, 72, 0.2);
+        color: $color-magenta;
+        padding: 2px 6px;
+        border-radius: $radius-full;
+        font-weight: 700;
+      }
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: $spacing-4 $spacing-3;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      overflow-y: auto;
+      @include custom-scrollbar(4px, rgba(255, 255, 255, 0.2));
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.65rem 1rem;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-inverse-muted;
+        transition: all $transition-fast;
+        text-decoration: none;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.08);
+          color: $color-white;
+        }
+
+        &.active {
+          background-color: $color-blue-primary;
+          color: $color-white;
+          box-shadow: $shadow-brand-glow;
+        }
+      }
+    }
+
+    .sidebar-footer {
+      padding: $spacing-4 $spacing-6;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .user-info {
+        .name {
+          font-size: $font-size-xs;
+          font-weight: $font-weight-bold;
+          color: $color-white;
+        }
+        .role {
+          font-size: 0.65rem;
+          color: $color-text-muted;
+        }
+      }
+
+      button {
+        color: $color-text-muted;
+        &:hover {
+          color: $color-magenta;
+        }
+      }
+    }
+  }
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    .admin-header {
+      height: 64px;
+      background-color: $color-white;
+      border-bottom: 1px solid $color-border-light;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 $spacing-8;
+
+      h2 {
+        font-size: $font-size-lg;
+        color: $color-navy-dark;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: $spacing-4;
+
+        a.store-link {
+          font-size: $font-size-sm;
+          color: $color-blue-primary;
+          font-weight: $font-weight-semibold;
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+        }
+      }
+    }
+
+    .admin-content {
+      padding: $spacing-8;
+      flex: 1;
+    }
+  }
+}

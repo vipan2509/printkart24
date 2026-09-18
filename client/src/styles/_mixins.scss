@@ -1,0 +1,154 @@
+// ==========================================
+// PRINTKART24 — SCSS MIXINS & UTILITIES
+// ==========================================
+@use './variables' as *;
+@use './breakpoints' as *;
+
+// Flexbox Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Grid Mixin
+@mixin grid-auto-fit($min-width: 260px, $gap: $spacing-6) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// Container Mixin
+@mixin container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $container-padding-mobile;
+  padding-right: $container-padding-mobile;
+
+  @include from($bp-tablet) {
+    padding-left: $container-padding-desktop;
+    padding-right: $container-padding-desktop;
+  }
+}
+
+// Modern Glassmorphism
+@mixin glass-panel($bg-opacity: 0.85, $blur: 12px) {
+  background: rgba(255, 255, 255, $bg-opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+@mixin dark-glass-panel($bg-opacity: 0.85, $blur: 16px) {
+  background: rgba(11, 19, 43, $bg-opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+// Text Truncation
+@mixin truncate-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Card Base
+@mixin card-base {
+  background-color: $color-surface-card;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border-light;
+  box-shadow: $shadow-sm;
+  transition: transform $transition-normal, box-shadow $transition-normal, border-color $transition-normal;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: $color-border-dark;
+  }
+}
+
+// Interactive Button Base
+@mixin interactive-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-base;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Custom Smooth Scrollbars
+@mixin custom-scrollbar($width: 6px, $thumb-color: $color-border-dark, $track-color: transparent) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    border-radius: $radius-full;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+    border-radius: $radius-full;
+    &:hover {
+      background-color: darken($thumb-color, 12%);
+    }
+  }
+}

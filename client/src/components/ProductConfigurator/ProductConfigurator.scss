@@ -1,0 +1,201 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pk-configurator {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .option-name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $color-navy-dark;
+      }
+
+      .selected-val {
+        font-size: $font-size-xs;
+        color: $color-blue-primary;
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+    // Grid of chips/buttons
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.5rem;
+
+      .option-chip {
+        padding: 0.65rem 0.85rem;
+        border: 1.5px solid $color-border-light;
+        border-radius: $radius-md;
+        background-color: $color-white;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        cursor: pointer;
+        transition: all $transition-fast;
+        text-align: left;
+
+        .chip-label {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-medium;
+          color: $color-text-primary;
+        }
+
+        .chip-price-mod {
+          font-size: 0.7rem;
+          color: $color-text-muted;
+          margin-top: 2px;
+        }
+
+        &:hover {
+          border-color: $color-blue-primary;
+          background-color: $color-light-bg;
+        }
+
+        &--active {
+          border-color: $color-blue-primary;
+          background-color: $color-blue-light;
+
+          .chip-label {
+            color: $color-blue-primary;
+            font-weight: $font-weight-bold;
+          }
+          .chip-price-mod {
+            color: $color-blue-primary;
+          }
+        }
+      }
+    }
+
+    // Color Swatches
+    .colors-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+
+      .color-swatch {
+        width: 36px;
+        height: 36px;
+        border-radius: $radius-full;
+        border: 2px solid $color-white;
+        box-shadow: 0 0 0 1.5px $color-border-dark;
+        cursor: pointer;
+        position: relative;
+        transition: transform $transition-fast;
+
+        &:hover {
+          transform: scale(1.15);
+        }
+
+        &--active {
+          box-shadow: 0 0 0 2.5px $color-blue-primary;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  // Live Price Calculator Box
+  &__price-box {
+    background: linear-gradient(135deg, $color-light-bg 0%, #EDF2F7 100%);
+    border: 1px solid $color-border-light;
+    border-radius: $radius-lg;
+    padding: $spacing-5;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+
+      .total-price {
+        font-family: $font-family-heading;
+        font-size: 1.85rem;
+        font-weight: $font-weight-extrabold;
+        color: $color-navy-dark;
+      }
+
+      .unit-price {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+      }
+    }
+
+    .savings-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: $font-size-xs;
+      color: $color-success;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  // Pincode Delivery Estimator
+  &__pincode {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .pincode-label {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      color: $color-navy-dark;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .pincode-input-group {
+      display: flex;
+      gap: 0.5rem;
+
+      input {
+        max-width: 180px;
+        padding: 0.5rem 0.85rem;
+        border: 1px solid $color-border-dark;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        outline: none;
+
+        &:focus {
+          border-color: $color-blue-primary;
+        }
+      }
+    }
+
+    .estimate-result {
+      font-size: $font-size-xs;
+      color: $color-success;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  // Action Buttons
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+  }
+}

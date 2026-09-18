@@ -1,0 +1,263 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/breakpoints' as *;
+
+.pk-checkout {
+  padding: $spacing-8 0 $spacing-16 0;
+
+  h1 {
+    font-size: 2rem;
+    color: $color-navy-dark;
+    margin-bottom: $spacing-8;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-8;
+
+    @include from($bp-desktop-sm) {
+      grid-template-columns: 1.8fr 1fr;
+    }
+  }
+
+  // Stepper Accordions
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+
+    .checkout-step-card {
+      @include card-base;
+      overflow: hidden;
+
+      .step-header {
+        padding: $spacing-5 $spacing-6;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: $color-white;
+        cursor: pointer;
+
+        .header-left {
+          display: flex;
+          align-items: center;
+          gap: $spacing-4;
+
+          .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: $radius-full;
+            background-color: $color-light-bg;
+            color: $color-navy-dark;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-xs;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $color-border-dark;
+
+            &--active {
+              background-color: $color-blue-primary;
+              color: $color-white;
+              border-color: $color-blue-primary;
+            }
+
+            &--completed {
+              background-color: $color-success;
+              color: $color-white;
+              border-color: $color-success;
+            }
+          }
+
+          h3 {
+            font-size: $font-size-base;
+            color: $color-navy-dark;
+            margin: 0;
+          }
+        }
+      }
+
+      .step-body {
+        padding: $spacing-6;
+        border-top: 1px solid $color-border-light;
+        background: $color-white;
+      }
+    }
+  }
+
+  // Form Fields
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: $spacing-4;
+
+    @include from($bp-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      &--full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        color: $color-navy-dark;
+      }
+
+      input,
+      select {
+        padding: 0.65rem 0.85rem;
+        border: 1px solid $color-border-dark;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        outline: none;
+
+        &:focus {
+          border-color: $color-blue-primary;
+        }
+      }
+    }
+  }
+
+  // Shipping & Payment Options List
+  .selectable-options {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+
+    .option-row {
+      padding: $spacing-4;
+      border: 1.5px solid $color-border-light;
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover {
+        border-color: $color-blue-primary;
+      }
+
+      &--selected {
+        border-color: $color-blue-primary;
+        background: $color-blue-light;
+      }
+
+      .option-left {
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+
+        input[type="radio"] {
+          accent-color: $color-blue-primary;
+        }
+
+        .title {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          color: $color-navy-dark;
+        }
+
+        .sub {
+          font-size: $font-size-xs;
+          color: $color-text-muted;
+        }
+      }
+
+      .price {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+        color: $color-navy-dark;
+      }
+    }
+  }
+
+  // Order Review Sidebar
+  &__sidebar {
+    @include card-base;
+    padding: $spacing-6;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-5;
+
+    h3 {
+      font-size: $font-size-lg;
+      color: $color-navy-dark;
+      margin: 0;
+      padding-bottom: $spacing-3;
+      border-bottom: 1px solid $color-border-light;
+    }
+
+    .sidebar-items {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-3;
+      max-height: 280px;
+      overflow-y: auto;
+      @include custom-scrollbar;
+
+      .mini-item {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+
+        img {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          border-radius: $radius-sm;
+        }
+
+        .item-text {
+          flex: 1;
+          .name {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-bold;
+            @include truncate-1;
+          }
+          .meta {
+            font-size: 11px;
+            color: $color-text-muted;
+          }
+        }
+
+        .price {
+          font-size: $font-size-xs;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    .breakdown-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-top: 1px solid $color-border-light;
+      padding-top: $spacing-4;
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+
+        &--total {
+          border-top: 1px solid $color-border-light;
+          padding-top: 0.75rem;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
+          color: $color-navy-dark;
+        }
+      }
+    }
+  }
+}

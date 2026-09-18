@@ -1,0 +1,263 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/breakpoints' as *;
+
+.pk-cart {
+  padding: $spacing-8 0 $spacing-16 0;
+
+  h1 {
+    font-size: 2rem;
+    color: $color-navy-dark;
+    margin-bottom: $spacing-8;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-8;
+
+    @include from($bp-desktop-sm) {
+      grid-template-columns: 1.6fr 1fr;
+    }
+  }
+
+  // Items List
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+
+    .free-shipping-meter {
+      background: $color-blue-light;
+      border: 1px solid $color-blue-subtle;
+      padding: $spacing-4 $spacing-5;
+      border-radius: $radius-lg;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .meter-text {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $color-blue-primary;
+      }
+
+      .meter-bar {
+        height: 6px;
+        background: rgba(30, 96, 213, 0.2);
+        border-radius: $radius-full;
+        overflow: hidden;
+
+        .fill {
+          height: 100%;
+          background: $color-blue-primary;
+          transition: width $transition-normal;
+        }
+      }
+    }
+
+    .cart-item-card {
+      @include card-base;
+      padding: $spacing-5;
+      display: flex;
+      gap: $spacing-4;
+
+      .item-image {
+        width: 100px;
+        height: 100px;
+        border-radius: $radius-md;
+        overflow: hidden;
+        background: $color-light-bg;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .item-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .item-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+
+          h3 {
+            font-size: $font-size-base;
+            font-weight: $font-weight-bold;
+            color: $color-navy-dark;
+            margin-bottom: 0.25rem;
+          }
+
+          .delete-btn {
+            color: $color-text-muted;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 4px;
+
+            &:hover {
+              color: $color-magenta;
+            }
+          }
+        }
+
+        .config-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.35rem;
+          margin-bottom: 0.5rem;
+
+          .tag {
+            font-size: 0.7rem;
+            background-color: $color-light-bg;
+            border: 1px solid $color-border-light;
+            padding: 2px 6px;
+            border-radius: $radius-xs;
+            color: $color-text-secondary;
+          }
+        }
+
+        .custom-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 11px;
+          color: $color-magenta;
+          font-weight: $font-weight-semibold;
+          margin-bottom: 0.5rem;
+        }
+
+        .item-bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .qty-controller {
+            display: flex;
+            align-items: center;
+            border: 1px solid $color-border-dark;
+            border-radius: $radius-md;
+            overflow: hidden;
+
+            button {
+              padding: 0.35rem 0.6rem;
+              background-color: $color-light-bg;
+              border: none;
+              cursor: pointer;
+              color: $color-text-primary;
+
+              &:hover {
+                background-color: $color-border-light;
+              }
+            }
+
+            span.qty-val {
+              padding: 0 0.75rem;
+              font-size: $font-size-sm;
+              font-weight: $font-weight-bold;
+            }
+          }
+
+          .item-price {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            color: $color-navy-dark;
+          }
+        }
+      }
+    }
+  }
+
+  // Summary Sidebar
+  &__summary {
+    @include card-base;
+    padding: $spacing-6;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-5;
+
+    h3 {
+      font-size: $font-size-lg;
+      color: $color-navy-dark;
+      padding-bottom: $spacing-3;
+      border-bottom: 1px solid $color-border-light;
+      margin: 0;
+    }
+
+    .coupon-box {
+      display: flex;
+      gap: 0.5rem;
+
+      input {
+        flex: 1;
+        padding: 0.5rem 0.85rem;
+        border: 1px solid $color-border-dark;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        text-transform: uppercase;
+        outline: none;
+
+        &:focus {
+          border-color: $color-blue-primary;
+        }
+      }
+    }
+
+    .applied-coupon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      background: $color-success-light;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: $radius-md;
+      font-size: $font-size-xs;
+      color: $color-success;
+      font-weight: $font-weight-semibold;
+
+      button {
+        color: $color-magenta;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: $font-size-xs;
+        text-decoration: underline;
+      }
+    }
+
+    .breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      .line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+
+        &--discount {
+          color: $color-success;
+          font-weight: $font-weight-semibold;
+        }
+
+        &--total {
+          border-top: 1px solid $color-border-light;
+          padding-top: 0.75rem;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
+          color: $color-navy-dark;
+        }
+      }
+    }
+  }
+}

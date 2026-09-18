@@ -1,0 +1,130 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/breakpoints' as *;
+
+.zazzle-footer {
+  background-color: $color-primary-purple;
+  color: #CBD5E1;
+  padding: 4rem 0 2rem 0;
+  font-family: 'Inter', sans-serif;
+
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  // Centered Brand Script Logo with divider lines
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+
+    .footer-line {
+      flex: 1;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.15);
+      max-width: 380px;
+
+      @media (max-width: 600px) {
+        display: none;
+      }
+    }
+
+    .footer-logo {
+      text-decoration: none;
+
+      .brand-script {
+        font-family: 'Pacifico', cursive;
+        font-size: 2.4rem;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
+
+        .brand-suffix {
+          font-family: 'Outfit', sans-serif;
+          font-weight: 800;
+          font-size: 1.8rem;
+          color: $color-secondary-magenta;
+          margin-left: 2px;
+        }
+      }
+    }
+  }
+
+  // 4 Columns
+  &__links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+
+    .links-col {
+      h4 {
+        color: #FFFFFF;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0 0 1.25rem 0;
+        letter-spacing: 0.02em;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        li {
+          a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.15s ease;
+
+            &:hover {
+              color: #FFFFFF;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Bottom Copyright & Payments
+  &__bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #64748B;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .copyright {
+      color: #94A3B8;
+    }
+
+    .payments {
+      color: #64748B;
+    }
+  }
+}

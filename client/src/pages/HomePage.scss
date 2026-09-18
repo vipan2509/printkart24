@@ -1,0 +1,961 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/breakpoints' as *;
+
+.zazzle-home {
+  background-color: #FFFFFF;
+  color: #1F2937;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+
+  // Generic container
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  // Section header typography
+  .section-head {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .sub-link {
+      display: inline-block;
+      margin-top: 0.35rem;
+      color: $color-secondary-magenta;
+      font-size: 0.95rem;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.text-center {
+      text-align: center;
+    }
+  }
+
+  .zazzle-section {
+    padding: 3rem 0;
+  }
+
+  // ==========================================
+  // 1. HERO SECTION: "Create Your Dream Day"
+  // ==========================================
+  .zazzle-hero {
+    background: #F4EFEA url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e6ded5' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    padding: 4.5rem 0 5rem 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #EAE3DC;
+
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+
+      @media (max-width: 960px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+      }
+    }
+
+    &__left {
+      max-width: 500px;
+
+      @media (max-width: 960px) {
+        margin: 0 auto;
+      }
+
+      .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.4rem;
+        font-weight: 700;
+        color: #111827;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        margin: 0 0 1.25rem 0;
+
+        @media (max-width: 640px) {
+          font-size: 2.4rem;
+        }
+      }
+
+      .hero-subtitle {
+        font-size: 1.15rem;
+        color: #4B5563;
+        line-height: 1.5;
+        margin: 0 0 2rem 0;
+        font-weight: 400;
+      }
+
+      .zazzle-pill-btn {
+        background-color: $color-primary-purple;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 9999px;
+        padding: 0.85rem 2.5rem;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(21, 1, 63, 0.25);
+
+        &:hover {
+          background-color: $color-secondary-magenta;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(174, 20, 120, 0.35);
+        }
+      }
+    }
+
+    &__right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+
+      .stationery-stack {
+        position: relative;
+        width: 100%;
+        max-width: 520px;
+        height: 380px;
+
+        .card-item {
+          position: absolute;
+          border-radius: 4px;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06);
+          background-color: #FFFFFF;
+          transition: transform 0.3s ease;
+
+          &:hover {
+            z-index: 50 !important;
+            transform: scale(1.03) !important;
+          }
+
+          // Back card with navy & stripes
+          &--details {
+            width: 170px;
+            height: 220px;
+            right: 15px;
+            top: 20px;
+            transform: rotate(6deg);
+            z-index: 1;
+            padding: 1rem;
+            background: #FAFAFA;
+            border: 1px solid #E5E7EB;
+
+            .card-header-bar {
+              font-size: 0.75rem;
+              font-weight: 800;
+              letter-spacing: 0.15em;
+              color: #192A7C;
+              text-align: center;
+              border-bottom: 2px solid #192A7C;
+              padding-bottom: 0.4rem;
+            }
+
+            .card-lines {
+              margin: 1rem 0;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              span {
+                height: 4px;
+                background-color: #E2E8F0;
+                border-radius: 2px;
+                &:nth-child(2) { width: 80%; }
+                &:nth-child(3) { width: 60%; }
+              }
+            }
+
+            .card-stripes {
+              height: 45px;
+              background: repeating-linear-gradient(
+                45deg,
+                #192A7C,
+                #192A7C 6px,
+                #FFFFFF 6px,
+                #FFFFFF 12px
+              );
+              border-radius: 2px;
+              margin-top: 1.5rem;
+            }
+          }
+
+          // Deep mustard yellow typography card
+          &--yellow {
+            width: 190px;
+            height: 230px;
+            right: 105px;
+            top: 10px;
+            transform: rotate(-4deg);
+            z-index: 2;
+            background: #EAB308;
+            color: #713F12;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            .badge-stamp {
+              font-size: 0.65rem;
+              font-weight: 800;
+              letter-spacing: 0.1em;
+              border: 1px solid #713F12;
+              padding: 0.2rem 0.5rem;
+              display: inline-block;
+              margin-bottom: 0.75rem;
+            }
+
+            .card-title-script {
+              font-family: 'Pacifico', cursive;
+              font-size: 1.2rem;
+              margin-bottom: 0.5rem;
+            }
+
+            .card-body-text {
+              font-size: 0.75rem;
+              font-weight: 700;
+              letter-spacing: 0.1em;
+            }
+          }
+
+          // Scalloped yellow RSVP card
+          &--rsvp {
+            width: 155px;
+            height: 140px;
+            right: 25px;
+            bottom: 30px;
+            transform: rotate(8deg);
+            z-index: 5;
+            background: #FEF9C3;
+            border: 2px dashed #CA8A04;
+            padding: 0.85rem;
+            border-radius: 8px;
+
+            .rsvp-title {
+              font-size: 0.75rem;
+              font-weight: 800;
+              color: #854D0E;
+              letter-spacing: 0.05em;
+              text-align: center;
+            }
+
+            .rsvp-sub {
+              font-size: 0.65rem;
+              color: #A16207;
+              text-align: center;
+              margin-bottom: 0.6rem;
+            }
+
+            .rsvp-checkboxes {
+              display: flex;
+              flex-direction: column;
+              gap: 0.35rem;
+              font-size: 0.65rem;
+              color: #854D0E;
+            }
+          }
+
+          // Blue Scalloped Frame Invitation Card (Iconic Zazzle Card)
+          &--blue-invite {
+            width: 220px;
+            height: 290px;
+            right: 90px;
+            top: 45px;
+            transform: rotate(2deg);
+            z-index: 10;
+            background-color: #FFFFFF;
+            padding: 0.75rem;
+            border-radius: 6px;
+
+            .card-scallop-border {
+              height: 100%;
+              border: 3px solid #1E3A8A;
+              border-radius: 12px;
+              padding: 1.25rem 0.75rem;
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+
+              .invite-intro {
+                font-size: 0.65rem;
+                font-style: italic;
+                color: #475569;
+                margin-bottom: 0.4rem;
+              }
+
+              .invite-names {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: #1E3A8A;
+                letter-spacing: 0.05em;
+                line-height: 1.1;
+              }
+
+              .invite-and {
+                font-family: 'Pacifico', cursive;
+                font-size: 0.95rem;
+                color: #E11D48;
+                margin: 0.2rem 0;
+              }
+
+              .invite-divider {
+                width: 40px;
+                height: 1px;
+                background-color: #CBD5E1;
+                margin: 0.6rem 0;
+              }
+
+              .invite-date {
+                font-size: 0.75rem;
+                font-weight: 800;
+                letter-spacing: 0.12em;
+                color: #0F172A;
+              }
+
+              .invite-venue {
+                font-size: 0.55rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                color: #64748B;
+                margin-top: 0.2rem;
+              }
+
+              .invite-place {
+                font-size: 0.55rem;
+                color: #94A3B8;
+                margin-top: 0.25rem;
+              }
+            }
+          }
+
+          // Front Photo Card: Save The Date
+          &--photo {
+            width: 200px;
+            height: 270px;
+            left: 20px;
+            top: 50px;
+            transform: rotate(-5deg);
+            z-index: 15;
+            background-color: #FFFFFF;
+            padding: 0.65rem;
+            border-radius: 4px;
+
+            .photo-wrapper {
+              position: relative;
+              width: 100%;
+              height: 200px;
+              overflow: hidden;
+              border-radius: 2px;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+
+              .photo-script-overlay {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                font-family: 'Pacifico', cursive;
+                font-size: 1.4rem;
+                color: #FFFFFF;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                line-height: 1;
+              }
+            }
+
+            .photo-caption {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0.5rem 0.2rem 0 0.2rem;
+              font-size: 0.65rem;
+              font-weight: 700;
+              color: #1E293B;
+
+              .date {
+                color: #64748B;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+
+        .botanical-accent {
+          position: absolute;
+          left: 5px;
+          top: 100px;
+          font-size: 2.2rem;
+          z-index: 20;
+          transform: rotate(-25deg);
+          filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 2. "WELCOME TO PRINTKART24" (Circular Avatars)
+  // ==========================================
+  .zazzle-welcome {
+    padding: 3.5rem 0;
+    border-bottom: 1px solid #F1F5F9;
+
+    .circles-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+
+      @media (max-width: 768px) {
+        gap: 1.5rem;
+      }
+
+      .circle-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        width: 125px;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateY(-4px);
+
+          .circle-img-wrapper img {
+            transform: scale(1.08);
+          }
+
+          .circle-label {
+            color: $color-secondary-magenta;
+          }
+        }
+
+        .circle-img-wrapper {
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
+          overflow: hidden;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+          background-color: #F8FAFC;
+          margin-bottom: 0.85rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+          }
+        }
+
+        .circle-label {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #1F2937;
+          text-align: center;
+          transition: color 0.2s;
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 3. "SHOP FOR YOUR EVENT" (3 Large Cards)
+  // ==========================================
+  .zazzle-events {
+    padding: 3rem 0;
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+
+      @media (max-width: 840px) {
+        grid-template-columns: 1fr;
+      }
+
+      .event-card {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateY(-4px);
+
+          .event-img-box img {
+            transform: scale(1.04);
+          }
+
+          .event-card-label {
+            color: $color-secondary-magenta;
+          }
+        }
+
+        .event-img-box {
+          width: 100%;
+          aspect-ratio: 4 / 3.4;
+          border-radius: 12px;
+          overflow: hidden;
+          background-color: #F3F4F6;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+          }
+        }
+
+        .event-card-label {
+          margin-top: 0.85rem;
+          font-size: 1.05rem;
+          font-weight: 600;
+          color: #111827;
+          text-align: center;
+          transition: color 0.2s;
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 4. "EVERY WEAR-CARE ESSENTIALS" (4 Cards)
+  // ==========================================
+  .zazzle-essentials {
+    padding: 2.5rem 0 3.5rem 0;
+
+    .essentials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+
+      @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
+
+      .essential-card {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateY(-4px);
+
+          .essential-img-box img {
+            transform: scale(1.05);
+          }
+
+          .essential-card-label {
+            color: $color-secondary-magenta;
+          }
+        }
+
+        .essential-img-box {
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          border-radius: 12px;
+          overflow: hidden;
+          background-color: #F3F4F6;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+          }
+        }
+
+        .essential-card-label {
+          margin-top: 0.75rem;
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #111827;
+          text-align: center;
+          transition: color 0.2s;
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 5. CURATED 6-GRID COLLECTIONS
+  // ==========================================
+  .zazzle-grid-showcase {
+    padding: 2rem 0 4rem 0;
+
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+
+      @media (max-width: 840px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 520px) {
+        grid-template-columns: 1fr;
+      }
+
+      .collection-card {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateY(-3px);
+
+          .collection-img-box img {
+            transform: scale(1.04);
+          }
+
+          .collection-card-label {
+            color: $color-secondary-magenta;
+          }
+        }
+
+        .collection-img-box {
+          position: relative;
+          width: 100%;
+          height: 180px;
+          border-radius: 10px;
+          overflow: hidden;
+          background-color: #F3F4F6;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+          }
+
+          .customizer-badge-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: $color-primary-purple;
+            color: #FFFFFF;
+            padding: 0.3rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+          }
+        }
+
+        .collection-card-label {
+          margin-top: 0.65rem;
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #1F2937;
+          text-align: center;
+          transition: color 0.2s;
+        }
+
+        &--special {
+          .collection-card-label {
+            color: $color-secondary-magenta;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 6. B2B / CORPORATE PROMO BANNER
+  // ==========================================
+  .zazzle-creator-banner {
+    padding: 1rem 0 3.5rem 0;
+
+    .creator-banner-box {
+      background-color: #EAEAEA;
+      border-radius: 14px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+
+      @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+      }
+
+      .creator-banner-left {
+        height: 280px;
+
+        .banner-side-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .creator-banner-right {
+        padding: 2.5rem 3rem;
+
+        @media (max-width: 600px) {
+          padding: 1.75rem;
+        }
+
+        h2 {
+          font-size: 1.65rem;
+          font-weight: 700;
+          color: #111827;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.02em;
+        }
+
+        p {
+          color: #4B5563;
+          font-size: 0.95rem;
+          line-height: 1.5;
+          margin: 0 0 1.5rem 0;
+        }
+
+        .zazzle-pill-btn--dark {
+          background-color: $color-primary-purple;
+          color: #FFFFFF;
+          border: none;
+          border-radius: 9999px;
+          padding: 0.75rem 2rem;
+          font-size: 0.95rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: $color-secondary-magenta;
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 7. OFFICIALLY TRUSTED BRANDS
+  // ==========================================
+  .zazzle-licensed-stores {
+    padding: 1.5rem 0 3rem 0;
+    border-bottom: 1px solid #F1F5F9;
+
+    .section-subhead {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 1.75rem;
+    }
+
+    .brands-logos-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+
+      span {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #94A3B8;
+        letter-spacing: 0.15em;
+        opacity: 0.75;
+        transition: opacity 0.2s;
+
+        &:hover {
+          opacity: 1;
+          color: $color-primary-purple;
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 8. THE PRINTKART24 PROMISE
+  // ==========================================
+  .zazzle-promise {
+    padding: 4rem 0 3.5rem 0;
+
+    .promise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin: 2.5rem 0;
+
+      @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .promise-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .promise-icon {
+          color: $color-secondary-magenta;
+          margin-bottom: 1.25rem;
+        }
+
+        h4 {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #111827;
+          margin: 0 0 0.5rem 0;
+        }
+
+        p {
+          font-size: 0.9rem;
+          color: #4B5563;
+          line-height: 1.5;
+          margin: 0;
+          max-width: 300px;
+        }
+      }
+    }
+
+    .promise-footer-link {
+      a {
+        color: $color-secondary-magenta;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 9. "GET EXCLUSIVE OFFERS" EMAIL NEWSLETTER
+  // ==========================================
+  .zazzle-newsletter {
+    padding: 2.5rem 0 4.5rem 0;
+
+    .newsletter-box {
+      max-width: 540px;
+      margin: 0 auto;
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #111827;
+        margin: 0 0 1.25rem 0;
+      }
+
+      .newsletter-inline-form {
+        display: flex;
+        border: 1.5px solid #CBD5E1;
+        border-radius: 9999px;
+        padding: 3px 3px 3px 1.25rem;
+        background-color: #FFFFFF;
+
+        input {
+          flex: 1;
+          border: none;
+          outline: none;
+          background: transparent;
+          font-size: 0.9rem;
+          color: #0F172A;
+
+          &::placeholder {
+            color: #64748B;
+          }
+        }
+
+        button {
+          background-color: $color-primary-purple;
+          color: #FFFFFF;
+          border: none;
+          border-radius: 9999px;
+          padding: 0.65rem 1.6rem;
+          font-size: 0.85rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: $color-secondary-magenta;
+          }
+        }
+      }
+
+      .newsletter-success {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: #059669;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  // ==========================================
+  // Floating "Need Help?" Chat Pill
+  // ==========================================
+  .floating-help-pill {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #FFFFFF;
+    color: #111827;
+    border: 1px solid #CBD5E1;
+    border-radius: 9999px;
+    padding: 0.55rem 1.15rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $color-primary-purple;
+      color: #FFFFFF;
+      border-color: $color-primary-purple;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(21, 1, 63, 0.3);
+    }
+  }
+}

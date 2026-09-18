@@ -1,0 +1,134 @@
+// ==========================================
+// PRINTKART24 — UTILITY CLASSES
+// ==========================================
+@use './variables' as *;
+@use './breakpoints' as *;
+@use './mixins' as *;
+
+.container {
+  @include container;
+}
+
+// Spacing Utilities
+.mt-1 { margin-top: $spacing-1; }
+.mt-2 { margin-top: $spacing-2; }
+.mt-3 { margin-top: $spacing-3; }
+.mt-4 { margin-top: $spacing-4; }
+.mt-6 { margin-top: $spacing-6; }
+.mt-8 { margin-top: $spacing-8; }
+
+.mb-1 { margin-bottom: $spacing-1; }
+.mb-2 { margin-bottom: $spacing-2; }
+.mb-3 { margin-bottom: $spacing-3; }
+.mb-4 { margin-bottom: $spacing-4; }
+.mb-6 { margin-bottom: $spacing-6; }
+.mb-8 { margin-bottom: $spacing-8; }
+
+.py-4 { padding-top: $spacing-4; padding-bottom: $spacing-4; }
+.py-8 { padding-top: $spacing-8; padding-bottom: $spacing-8; }
+.py-12 { padding-top: $spacing-12; padding-bottom: $spacing-12; }
+.py-16 { padding-top: $spacing-16; padding-bottom: $spacing-16; }
+
+// Flex & Alignment
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: $spacing-2; }
+.gap-3 { gap: $spacing-3; }
+.gap-4 { gap: $spacing-4; }
+.gap-6 { gap: $spacing-6; }
+.flex-1 { flex: 1 1 0%; }
+.flex-wrap { flex-wrap: wrap; }
+
+// Responsive Display
+.hide-on-mobile {
+  @include mobile-only {
+    display: none !important;
+  }
+}
+
+.hide-on-desktop {
+  @include desktop-and-up {
+    display: none !important;
+  }
+}
+
+// Text Alignments
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+// Colors
+.text-primary-blue { color: $color-blue-primary; }
+.text-magenta { color: $color-magenta; }
+.text-navy { color: $color-navy-dark; }
+.text-muted { color: $color-text-muted; }
+.text-white { color: $color-white; }
+
+// Badges & Pills
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  padding: 0.25rem 0.625rem;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  &--primary {
+    background-color: $color-blue-light;
+    color: $color-blue-primary;
+  }
+
+  &--accent {
+    background-color: $color-magenta-light;
+    color: $color-magenta;
+  }
+
+  &--success {
+    background-color: $color-success-light;
+    color: $color-success;
+  }
+
+  &--warning {
+    background-color: $color-warning-light;
+    color: $color-warning;
+  }
+
+  &--navy {
+    background-color: $color-navy-dark;
+    color: $color-white;
+  }
+}
+
+// Loading Spinner
+@keyframes pk-spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: currentColor;
+  animation: pk-spin 0.75s linear infinite;
+}
+
+// Shimmer Skeleton Effect
+@keyframes pk-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  animation: pk-shimmer 1.5s infinite;
+  border-radius: $radius-sm;
+}

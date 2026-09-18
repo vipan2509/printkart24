@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+
+.pk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: $font-weight-semibold;
+  padding: 0.2rem 0.5rem;
+  border-radius: $radius-full;
+  line-height: 1;
+
+  &--primary {
+    background-color: $color-blue-light;
+    color: $color-blue-primary;
+  }
+
+  &--accent {
+    background-color: $color-magenta-light;
+    color: $color-magenta;
+  }
+
+  &--success {
+    background-color: $color-success-light;
+    color: $color-success;
+  }
+
+  &--warning {
+    background-color: $color-warning-light;
+    color: $color-warning;
+  }
+
+  &--navy {
+    background-color: $color-navy-dark;
+    color: $color-white;
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: 1px solid $color-border-dark;
+    color: $color-text-secondary;
+  }
+}

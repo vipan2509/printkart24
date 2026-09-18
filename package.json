@@ -1,0 +1,21 @@
+{
+  "name": "printkart24",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PRINTKART24 — Full-Stack Custom Printing & Corporate Gifting E-Commerce Platform",
+  "scripts": {
+    "dev": "concurrently -n \"server,client\" -c \"blue,magenta\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "vercel-build": "cd server && npm install && npx prisma generate && npm run build && cd ../client && npm install && npm run build",
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "db:generate": "npm run db:generate --prefix server",
+    "db:migrate": "npm run db:migrate --prefix server",
+    "db:seed": "npm run db:seed --prefix server"
+  },
+  "devDependencies": {
+    "@vercel/node": "^5.1.8",
+    "concurrently": "^9.1.2"
+  }
+}

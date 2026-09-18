@@ -1,0 +1,384 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/breakpoints' as *;
+
+.pk-customizer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  background-color: #0F172A;
+  color: $color-white;
+  overflow: hidden;
+
+  // Header Toolbar
+  &__topbar {
+    height: 56px;
+    background-color: $color-navy-dark;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-6;
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: $spacing-4;
+
+      .product-title {
+        font-family: $font-family-heading;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $color-white;
+      }
+    }
+
+    .topbar-center {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+
+      .tool-btn {
+        padding: 0.4rem 0.75rem;
+        border-radius: $radius-md;
+        background: rgba(255, 255, 255, 0.08);
+        color: $color-white;
+        border: none;
+        font-size: $font-size-xs;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover:not(:disabled) {
+          background: rgba(255, 255, 255, 0.18);
+        }
+
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
+
+        &--active {
+          background: $color-blue-primary;
+        }
+      }
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: $spacing-3;
+    }
+  }
+
+  // Workspace Main
+  &__workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+
+    @include mobile-only {
+      flex-direction: column;
+    }
+  }
+
+  // Left Sidebar Tools
+  &__tools {
+    width: 340px;
+    background-color: #131E3D;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    @include custom-scrollbar(4px, rgba(255, 255, 255, 0.2));
+
+    @include mobile-only {
+      width: 100%;
+      height: 250px;
+    }
+
+    .tools-nav {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .nav-tab {
+        flex: 1;
+        padding: 0.75rem 0.5rem;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        text-align: center;
+        background: transparent;
+        border: none;
+        color: $color-text-muted;
+        cursor: pointer;
+        transition: all $transition-fast;
+        border-bottom: 2px solid transparent;
+
+        &:hover {
+          color: $color-white;
+        }
+
+        &--active {
+          color: $color-magenta;
+          border-bottom-color: $color-magenta;
+          background: rgba(225, 29, 72, 0.05);
+        }
+      }
+    }
+
+    .tools-content {
+      padding: $spacing-5;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-5;
+
+      .tool-group {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+
+        label {
+          font-size: $font-size-xs;
+          font-weight: $font-weight-bold;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: $color-text-muted;
+        }
+
+        input[type="text"],
+        select {
+          width: 100%;
+          padding: 0.6rem 0.85rem;
+          background-color: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: $radius-md;
+          color: $color-white;
+          font-size: $font-size-sm;
+          outline: none;
+
+          &:focus {
+            border-color: $color-blue-primary;
+          }
+        }
+
+        select option {
+          background-color: $color-navy-dark;
+          color: $color-white;
+        }
+
+        .upload-dropzone {
+          border: 2px dashed rgba(255, 255, 255, 0.2);
+          border-radius: $radius-lg;
+          padding: $spacing-6;
+          text-align: center;
+          cursor: pointer;
+          transition: all $transition-fast;
+
+          &:hover {
+            border-color: $color-blue-primary;
+            background: rgba(30, 96, 213, 0.1);
+          }
+
+          p {
+            font-size: $font-size-xs;
+            color: $color-text-muted;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+
+      // Color palette
+      .color-picker-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+
+        .color-dot {
+          width: 28px;
+          height: 28px;
+          border-radius: $radius-full;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+          cursor: pointer;
+          transition: transform $transition-fast;
+
+          &:hover {
+            transform: scale(1.2);
+          }
+
+          &--active {
+            border-color: $color-white;
+            transform: scale(1.15);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+          }
+        }
+      }
+
+      // Layer list item
+      .layer-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: $radius-md;
+        font-size: $font-size-xs;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover,
+        &--active {
+          background: rgba(30, 96, 213, 0.2);
+          border-color: $color-blue-primary;
+        }
+
+        .layer-actions {
+          display: flex;
+          gap: 0.25rem;
+
+          button {
+            color: $color-text-muted;
+            padding: 2px;
+            &:hover {
+              color: $color-white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Center Canvas Stage
+  &__stage {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0B132B;
+    overflow: hidden;
+    user-select: none;
+
+    // View Switcher (Front / Back)
+    .side-switcher {
+      position: absolute;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 0.25rem;
+      border-radius: $radius-full;
+      display: flex;
+      gap: 0.25rem;
+      z-index: 20;
+
+      button {
+        padding: 0.4rem 1rem;
+        border-radius: $radius-full;
+        border: none;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $color-text-inverse-muted;
+        background: transparent;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &.active {
+          background: $color-white;
+          color: $color-navy-dark;
+          box-shadow: $shadow-sm;
+        }
+      }
+    }
+
+    // Interactive Stage Container
+    .canvas-container {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      border-radius: $radius-xl;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      background-color: #FFFFFF;
+      transform-origin: center center;
+      transition: transform $transition-fast;
+
+      &.grid-overlay {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      .product-mockup-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+
+      // Printable zone indicator
+      .printable-boundary {
+        position: absolute;
+        top: 20%;
+        left: 25%;
+        width: 50%;
+        height: 55%;
+        border: 1.5px dashed rgba(30, 96, 213, 0.45);
+        pointer-events: none;
+        border-radius: $radius-sm;
+
+        .zone-label {
+          position: absolute;
+          top: -20px;
+          left: 0;
+          font-size: 10px;
+          color: $color-blue-primary;
+          font-weight: $font-weight-bold;
+          letter-spacing: 0.05em;
+        }
+      }
+
+      // Dynamic Interactive Layers
+      .canvas-layer {
+        position: absolute;
+        cursor: move;
+        touch-action: none;
+
+        &--selected {
+          outline: 2px solid $color-blue-primary;
+          outline-offset: 2px;
+        }
+
+        .layer-text {
+          white-space: pre-wrap;
+          line-height: 1.15;
+          user-select: none;
+        }
+
+        .layer-image {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          pointer-events: none;
+        }
+
+        .resize-handle {
+          position: absolute;
+          bottom: -6px;
+          right: -6px;
+          width: 14px;
+          height: 14px;
+          background: $color-blue-primary;
+          border: 2px solid $color-white;
+          border-radius: 2px;
+          cursor: nwse-resize;
+        }
+      }
+    }
+  }
+}

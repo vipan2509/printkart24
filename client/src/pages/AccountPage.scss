@@ -1,0 +1,159 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/breakpoints' as *;
+
+.pk-account {
+  padding: $spacing-8 0 $spacing-16 0;
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-8;
+
+    @include from($bp-desktop-sm) {
+      grid-template-columns: 260px 1fr;
+    }
+  }
+
+  // Sidebar
+  &__sidebar {
+    background: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: $radius-lg;
+    padding: $spacing-6;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: $spacing-4;
+      border-bottom: 1px solid $color-border-light;
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: $radius-full;
+        background: $color-blue-light;
+        color: $color-blue-primary;
+        font-weight: $font-weight-bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-base;
+      }
+
+      .name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $color-navy-dark;
+      }
+      .email {
+        font-size: 0.75rem;
+        color: $color-text-muted;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      button.account-nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.65rem 0.85rem;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: all $transition-fast;
+        text-align: left;
+        width: 100%;
+
+        &:hover {
+          background-color: $color-light-bg;
+          color: $color-blue-primary;
+        }
+
+        &.active {
+          background-color: $color-blue-light;
+          color: $color-blue-primary;
+          font-weight: $font-weight-bold;
+        }
+
+        &.logout {
+          color: $color-magenta;
+          &:hover {
+            background-color: $color-magenta-light;
+          }
+        }
+      }
+    }
+  }
+
+  // Content Area
+  &__content {
+    background: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: $radius-lg;
+    padding: $spacing-8;
+
+    h2 {
+      font-size: 1.5rem;
+      color: $color-navy-dark;
+      margin-bottom: $spacing-6;
+    }
+
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: $spacing-4;
+      margin-bottom: $spacing-8;
+
+      .stat-card {
+        padding: $spacing-5;
+        border-radius: $radius-md;
+        background: $color-light-bg;
+        border: 1px solid $color-border-light;
+
+        .val {
+          font-size: 1.75rem;
+          font-weight: $font-weight-bold;
+          color: $color-navy-dark;
+        }
+        .lbl {
+          font-size: $font-size-xs;
+          color: $color-text-muted;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .orders-table {
+      width: 100%;
+
+      th {
+        text-align: left;
+        padding: $spacing-3;
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        border-bottom: 1px solid $color-border-light;
+      }
+
+      td {
+        padding: $spacing-4 $spacing-3;
+        font-size: $font-size-sm;
+        border-bottom: 1px solid $color-border-light;
+        vertical-align: middle;
+      }
+    }
+  }
+}

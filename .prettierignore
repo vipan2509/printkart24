@@ -1,8 +1,0 @@
-node_modules
-.next
-out
-build
-.vercel
-public/uploads
-v0_plans
-.gitignore
